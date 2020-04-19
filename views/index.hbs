@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Levantiqra</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <style>
+        body {
+        }
+        textarea {
+            width: 100%;
+        }
+        .isnotfound {
+            color: red;
+        }
+        [lang="ar"] {
+            direction: rtl;
+            font-size: 1.5em;
+            font-family: 'Calibri';
+        }
+        .word:hover {
+            background-color: lemonchiffon;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <div class="row">
+            <div class="col">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col">
+                            <label for="content">Enter Levantine Arabic content below:</label>
+                            <textarea class="form-control" lang="ar" name="content" rows="4">{{content}}</textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <button class="form-control btn btn-primary" value="submit">Help me read</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row mt-3" lang="ar">
+            <div class="col text-right" lang="ar">
+                {{#each words}}
+                    {{#unless word.delim}}
+                        <span class="word" data-title="{{this.stem}}" data-toggle="popover"
+                            data-content="{{#each pos}}{{#if this.stem}}<b>{{this.stem}} ({{this.pos}})</b><br>{{/if}}{{#each meta}}<p>{{@index}}: {{this.past_a}}/{{this.pres_a}} {{this.def}}</p>{{/each}}{{/each}}">
+                        {{#unless this.error}}
+                            {{this.word}}
+                        {{else}}
+                            <span class="word isnotfound">{{this.word}}</span>
+                        {{/unless}}
+                        </span>
+                    {{else}}
+                        {{#if (islinefeed this.word)}}
+                            <br>
+                        {{else}}
+                            {{this.word}}
+                        {{/if}}
+                    {{/unless}}
+                {{/each}}
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip( {
+                html: true
+            });
+            $('[data-toggle="popover"]').popover( {
+                html: true,
+                trigger: 'hover'
+            });
+        });
+    </script>
+
+</body>
+
+</html>

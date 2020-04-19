@@ -1,0 +1,19 @@
+{
+  "name": "arabic-reader",
+  "version": "1.0.0",
+  "description": "Web app to help read Dialect Arabic text, such as, the Levantine dialect",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adnan Mukhtar",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "csv": "^5.3.2",
+    "csv-database": "^0.9.2",
+    "express": "^4.17.1",
+    "hbs": "^4.1.1"
+  }
+}
