@@ -7,7 +7,7 @@ Arabic Reader is a Web app that help Arabic dialect learners to be able to easil
 - Make sure to have Node installed. If not, visit https://nodejs.org
 - Download this repository from GitHub
 - Within the donwloaded directory, execute `npm install`
-- To start the web app, execute ` npm start
+- To start the web app, execute `npm start`
 - Open the browser, then visit the URL ` http://localhost:3000`
 
 **Note:** This project is a work in progress
