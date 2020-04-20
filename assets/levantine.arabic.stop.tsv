@@ -27,6 +27,7 @@ term_a	term_b	def
 ما	ما	not
 مو،مِش	مو،مش	not
 كُلّ	كل	all
+شوَيّ،شوَيّة	شوي،شوية	little
 لَو	لو	if
 يا	يا	O
 هيك	هيك	thus, such
@@ -56,8 +57,9 @@ term_a	term_b	def
 بَعْض	بعض	some
 كيف,إزَيّ	كيف,ازي	how
 وين,فين	وين,فين	where
+أيّ	اي	any, which
 فوق	فوق	above,top
-تَحْت	تحت	below,under
+تَحْت	تحت	below, under
 وَرا	ورا	behind
 جَنْب	جنب	beside
 قَبْل	قبل	before

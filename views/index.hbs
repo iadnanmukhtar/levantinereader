@@ -6,18 +6,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <style>
         body {
+            background-color: #fafafa;
         }
+
         textarea {
             width: 100%;
         }
+
         .isnotfound {
             color: red;
         }
+
         [lang="ar"] {
             direction: rtl;
-            font-size: 1.5em;
+            font-size: 24px;
             font-family: 'Calibri';
         }
+
         .word:hover {
             background-color: lemonchiffon;
         }
@@ -25,14 +30,44 @@
 </head>
 
 <body>
-    <main class="container">
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <a class="navbar-brand" href="/">Arabic Reader</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    {{#unless content}}
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome Arabic dialect language learner! </h1>
+        <p class="lead">Give this tool any text or article written in the Levantine Arabic dialect,
+            and it will attempt to give you a definition for each word to help make it easy to read
+            and learn spoken Arabic. <strong>Happy learning while reading!</strong></p>
+    </div>
+    {{/unless}}
+
+
+    <main class="container mt-3">
         <div class="row">
             <div class="col">
                 <form method="POST">
                     <div class="row">
                         <div class="col">
-                            <label for="content">Enter Levantine Arabic content below:</label>
-                            <textarea class="form-control" lang="ar" name="content" rows="4">{{content}}</textarea>
+                            <label for="content">
+                                <h4>Type-in any Levantine Arabic text:</h4>
+                            </label>
+                            <textarea class="form-control" lang="ar" name="content" rows="4"
+                                placeholder="أكتب أي مقالة باللغة الشامية (العامية)">{{content}}</textarea>
                         </div>
                     </div>
                     <div class="row mt-2">
@@ -44,25 +79,31 @@
             </div>
         </div>
 
-        <div class="row mt-3" lang="ar">
+        <div class="row mt-3">
+            <div class="col mt-3">
+                <h5 class="display-5">Hover over the words to get guessed definitions for the stemmed word:</h5>
+            </div>
+        </div>
+
+        <div class="row mt-1">
             <div class="col text-right" lang="ar">
                 {{#each words}}
-                    {{#unless this.delim}}
-                        <span class="word" data-title="{{this.stem}}" data-toggle="popover"
-                            data-content="{{#each pos}}{{#if this.stem}}<b>{{this.stem}} ({{this.pos}})</b><br>{{/if}}{{#each meta}}<p>{{@index}}: {{this.past_a}}/{{this.pres_a}} {{this.def}}</p>{{/each}}{{/each}}">
-                        {{#unless this.error}}
-                            {{this.word}}
-                        {{else}}
-                            <span class="word isnotfound">{{this.word}}</span>
-                        {{/unless}}
-                        </span>
+                {{#unless this.delim}}
+                <span class="word" data-title="{{this.word}}" data-toggle="popover"
+                    data-content="{{#each stems}}<b>{{this.stem}} ({{this.pos}})</b><br>{{this.meta.def}}</p>{{/each}}">
+                    {{#if this.match}}
+                    {{this.word}}
                     {{else}}
-                        {{#if (islinefeed this.word)}}
-                            <br>
-                        {{else}}
-                            {{this.word}}
-                        {{/if}}
-                    {{/unless}}
+                    <span class="word isnotfound">{{this.word}}</span>
+                    {{/if}}
+                </span>
+                {{else}}
+                {{#if (islinefeed this.word)}}
+                <br>
+                {{else}}
+                {{this.word}}
+                {{/if}}
+                {{/unless}}
                 {{/each}}
             </div>
         </div>
@@ -74,10 +115,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script>
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip( {
+            $('[data-toggle="tooltip"]').tooltip({
                 html: true
             });
-            $('[data-toggle="popover"]').popover( {
+            $('[data-toggle="popover"]').popover({
                 html: true,
                 trigger: 'hover'
             });

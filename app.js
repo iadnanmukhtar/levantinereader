@@ -31,14 +31,12 @@ function process(req, res, content) {
             var token = tokens[i];
             if (token !== "") {
                 if (!token.match(DELIMS)) {
-                    var word = definer.define(token);
-                    defs.push(word);
+                    defs.push(definer.define(token));
                 } else {
                     defs.push({
                         word: token,
-                        hexCode: token.hexEncode(),
-                        delim: true,
-                        error: false
+                        match: true,
+                        delim: true
                     });
                 }
             }
