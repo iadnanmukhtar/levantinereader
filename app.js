@@ -29,13 +29,14 @@ function process(req, res, content) {
         var tokens = content.split(DELIMS);
         for (var i = 0; i < tokens.length; i++) {
             var token = tokens[i];
-            if (token != "") {
+            if (token !== "") {
                 if (!token.match(DELIMS)) {
                     var word = definer.define(token);
                     defs.push(word);
                 } else {
                     defs.push({
                         word: token,
+                        hexCode: token.hexEncode(),
                         delim: true,
                         error: false
                     });
@@ -54,7 +55,7 @@ String.prototype.hexEncode = function () {
     var result = "";
     for (i = 0; i < this.length; i++) {
         hex = this.charCodeAt(i).toString(16);
-        result += ("000" + hex).slice(-4);
+        result += ("\\x000" + hex).slice(-4);
     }
 
     return result

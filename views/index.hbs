@@ -47,7 +47,7 @@
         <div class="row mt-3" lang="ar">
             <div class="col text-right" lang="ar">
                 {{#each words}}
-                    {{#unless word.delim}}
+                    {{#unless this.delim}}
                         <span class="word" data-title="{{this.stem}}" data-toggle="popover"
                             data-content="{{#each pos}}{{#if this.stem}}<b>{{this.stem}} ({{this.pos}})</b><br>{{/if}}{{#each meta}}<p>{{@index}}: {{this.past_a}}/{{this.pres_a}} {{this.def}}</p>{{/each}}{{/each}}">
                         {{#unless this.error}}
