@@ -31,11 +31,13 @@ function process(req, res, content) {
             var token = tokens[i];
             if (token !== "") {
                 if (!token.match(DELIMS)) {
-                    defs.push(definer.define(token));
+                    var def = definer.define(token);
+                    defs.push(def);
                 } else {
                     defs.push({
                         word: token,
                         match: true,
+                        exactMatch: true,
                         delim: true
                     });
                 }
