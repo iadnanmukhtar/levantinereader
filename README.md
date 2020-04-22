@@ -1,5 +1,5 @@
 # What is Arabic Reader?
-Arabic Reader is a Web app that help Arabic dialect learners to be able to easily study text and articles written in dialect Arabic. This app is designed for the Arabic Levantine dialect, spoken in Jordan and Palestine. Altougth, it may also work for dialect Arabic spoken in Lebanon and Syria.
+Arabic Reader is a webapp that help Arabic dialect learners to be able to easily study text and articles written in dialect Arabic. This app is designed for the Arabic Levantine dialect, spoken in Jordan and Palestine. Altougth, it may also work for dialect Arabic spoken in Lebanon and Syria.
 
 ![Arabic Reader Screenshot](assets/screenshot.png)
 
