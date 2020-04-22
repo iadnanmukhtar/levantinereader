@@ -3022,7 +3022,6 @@ term	pl	pl_sound	fem_pl	fem	def
 شِبّابة		FALSE	TRUE	TRUE	reed flute
 شباط		FALSE	FALSE	FALSE	Februrary
 شُبّاك،شَبابيك		FALSE	FALSE	FALSE	window
-شُبّاك،شْبابيك	FALSE	FALSE		FALSE	window
 شِبَر،أَشبار/شبورة		FALSE	FALSE	TRUE	span, handspan, roughly 20cm
 شِبرِيّة،شَباري		FALSE	FALSE	TRUE	dagger (about one شِبَر in length)
 شَبعان		TRUE	TRUE	TRUE	full, satisfied, replete, sated
@@ -3585,7 +3584,6 @@ term	pl	pl_sound	fem_pl	fem	def
 طَيّارة		FALSE	TRUE	TRUE	aeroplane,plane, airplane, kite
 طَيّارة،طَيّارات	FALSE	FALSE		FALSE	airplane, kite
 طَيَّب		TRUE	TRUE	TRUE	good, fine, tasty, alive
-طَيَّب،بيطَيَّب		FALSE	FALSE	FALSE	tp cure, make better
 طيبة		FALSE	FALSE	TRUE	goodness, kindness
 طيْر،طيور		FALSE	FALSE	FALSE	fowl, bird
 طَيران		TRUE	TRUE	TRUE	flying, mad about, crazy about
