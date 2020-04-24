@@ -97,9 +97,9 @@
                 {{#each words}}
                 {{#unless this.delim}}
                 <span class="word" data-title="{{this.word}}" data-toggle="popover"
-                    data-content="{{#each stems}}<strong>{{this.stem}} ({{this.pos}})</strong><p>{{#if this.exactMatch}}<strong>{{this.meta.def}}</strong>{{else}}{{this.meta.def}}{{/if}}</p>{{/each}}">
+                    data-content="{{#each stems}}<span lang=ar><strong>{{this.term}}</strong></span> ({{this.pos}})<p>{{#if this.exact}}<strong>{{this.def}}</strong>{{else}}{{this.def}}{{/if}}</p>{{/each}}">
                     {{#if this.match}}
-                    {{#if this.exactMatch}}
+                    {{#if this.exact}}
                         <strong>{{this.word}}</strong>
                     {{else}}
                         {{this.word}}
