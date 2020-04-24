@@ -1,0 +1,35 @@
+@import url(//fonts.googleapis.com/earlyaccess/notonaskharabic.css);
+
+body {
+    background-color: #fafafa;
+}
+
+[lang="ar"] {
+    direction: rtl;
+    font-size: 24px;
+    font-family: 'Noto Naskh Arabic', Calibri, serif;
+}
+
+.pt-3-half {
+    padding-top: 1.4rem;
+}
+
+textarea {
+    width: 100%;
+}
+
+.isnotfound {
+    color: red;
+}
+
+.word:hover {
+    background-color: lemonchiffon;
+}
+
+.table-editable {
+    background-color: white;
+}
+
+.pt-3-half {
+    padding-top: 1.4rem;
+}

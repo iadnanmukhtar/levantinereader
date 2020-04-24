@@ -2,6 +2,7 @@ const bodyParser = require("body-parser");
 const express = require('express');
 const hbs = require('hbs');
 const definer = require('./lib/definer');
+const utils = require('./lib/utils');
 
 var app = express();
 app.set('view engine', 'hbs');
@@ -20,6 +21,10 @@ app.post('/', function (req, res) {
 
 app.get('/', function (req, res) {
     return process(req, res, req.query.content);
+});
+
+app.get('/search', function (req, res) {
+    return processSearch(req, res, req.query.q);
 });
 
 function process(req, res, content) {
@@ -45,24 +50,25 @@ function process(req, res, content) {
         }
     }
     res.render('index', {
-        'content': content,
-        'words': defs
+        content: content,
+        words: defs
     });
 }
 
-String.prototype.hexEncode = function () {
-    var hex, i;
-    var result = "";
-    for (i = 0; i < this.length; i++) {
-        hex = this.charCodeAt(i).toString(16);
-        result += ("\\x000" + hex).slice(-4);
+function processSearch(req, res, q) {
+    var results = new Array();
+    if (q && q != "" && !q.match(/^\s$/) && q.length > 2) {
+        q = utils.normalizeArabic(utils.stripArabicDiacritics(q));
+        for (var i = 0; i < definer.DICTS.length; i++) {
+            results = results.concat(definer.DICTS[i].search(q));
+        }
     }
-
-    return result
+    res.render('search.hbs', {
+        q: q,
+        results: results
+    });
 }
 
 hbs.registerHelper('islinefeed', function (value) {
-    var hex = value.hexEncode();
-    var result = (value == '\n');
-    return result;
+    return (value == '\n');
 });
