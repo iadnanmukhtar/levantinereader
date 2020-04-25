@@ -656,7 +656,7 @@ term	pl	pl_sound	fem_pl	fem	def
 أَهَمِّيّة		FALSE	FALSE	TRUE	importance
 أَهوَن		FALSE	FALSE	FALSE	easier, easiest
 أوْ	FALSE	FALSE		FALSE	or
-أَو بِالأَصَحّ،ـ		FALSE	FALSE	FALSE	or more precisely,
+بِالأَصَحّ		FALSE	FALSE	FALSE	or more precisely,
 أَواعي		FALSE	FALSE	FALSE	clothes
 أَوان		FALSE	FALSE	FALSE	time
 أُوتَيل		FALSE	TRUE	TRUE	hotel
@@ -684,7 +684,6 @@ term	pl	pl_sound	fem_pl	fem	def
 إيطاليا		FALSE	FALSE	FALSE	Italy
 أْيلول		FALSE	FALSE	FALSE	September
 أْيمتى		FALSE	FALSE	FALSE	when?
-بِــ	FALSE	FALSE		FALSE	with, by means
 باب،أبْواب	FALSE	FALSE		FALSE	door
 بابور،بَوابير		FALSE	FALSE	FALSE	ship (from French)
 باخِرة،بَواخَر		FALSE	FALSE	TRUE	ship
@@ -1004,7 +1003,6 @@ term	pl	pl_sound	fem_pl	fem	def
 بيعاديني		FALSE	FALSE	FALSE	he's hostile to me
 بَيعة،بَيعات	FALSE	FALSE		FALSE	transaction, deal
 بيِكفَر وُجود الّا		FALSE	FALSE	FALSE	he doesn't believe in God
-بيكَفّي!ـ		FALSE	FALSE	FALSE	that's enough!
 بين	FALSE	FALSE		FALSE	between
 بيئة		FALSE	FALSE	TRUE	environment, surroundings
 تابَع		FALSE	FALSE	TRUE	following
@@ -1704,7 +1702,6 @@ term	pl	pl_sound	fem_pl	fem	def
 جَوّي		FALSE	FALSE	TRUE	air-(adj), atmospheric, meteorological
 جي		FALSE	FALSE	TRUE	suffix borrowed from Turkish to form professions or character traits
 جَيب،جُيوب		FALSE	FALSE	FALSE	nasal cavity / sinus
-جيب!ـ		FALSE	FALSE	FALSE	bring!
 جَيب/جَيبة،جياب/جِياب		FALSE	FALSE	TRUE	pocket
 جَيَّد		FALSE	FALSE	FALSE	good
 جيرة		FALSE	FALSE	TRUE	neighborliness
@@ -2513,7 +2510,6 @@ term	pl	pl_sound	fem_pl	fem	def
 رَكّ		FALSE	FALSE	FALSE	burden, onus, responsibility
 ركاض		FALSE	FALSE	FALSE	running
 رُكبة،رُكَب/ركاب		FALSE	FALSE	TRUE	knee
-رَكَّبني!ـ		FALSE	FALSE	FALSE	give me a ride!
 رَكَت		FALSE	TRUE	TRUE	raquet
 رَكض		FALSE	FALSE	FALSE	running
 رَكعة		FALSE	TRUE	TRUE	prostration, kneeling
@@ -3267,7 +3263,7 @@ term	pl	pl_sound	fem_pl	fem	def
 صَبي،صِبيان		FALSE	FALSE	FALSE	boy, young man
 صَبي،صِبيان	FALSE	FALSE		FALSE	child (m)
 صَبِيّة،صَبايا		FALSE	FALSE	TRUE	girl, young woman (12 and over)
-صَحّ!ـ		FALSE	FALSE	FALSE	right! true!
+صَحّ		FALSE	FALSE	FALSE	right! true!
 صَحافة		FALSE	FALSE	TRUE	journalism, the press
 صَحافي،صَحافِيّة،صَحافِيّة\صَحافيّات	FALSE	FALSE		FALSE	journalist
 صَحّة		FALSE	FALSE	TRUE	health, soundness, rightness, correctness, authenticity
@@ -3332,7 +3328,6 @@ term	pl	pl_sound	fem_pl	fem	def
 صَفَري		FALSE	FALSE	FALSE	hepatitis, jaundice
 صَفطة		FALSE	TRUE	TRUE	pile, heap
 صَفقة		FALSE	TRUE	TRUE	deal (noun)
-صُفّوا!ـ		FALSE	FALSE	FALSE	line up!
 صَفوة		FALSE	FALSE	TRUE	ash
 صُفّيْرة،صَفافير		FALSE	FALSE	TRUE	whistle
 صَقر،صُقور		FALSE	FALSE	FALSE	hawk
@@ -3484,7 +3479,7 @@ term	pl	pl_sound	fem_pl	fem	def
 طائَر		FALSE	FALSE	TRUE	flying
 طايَر،طَوايَر		FALSE	FALSE	FALSE	tyre (from english)
 طائِرة		FALSE	TRUE	TRUE	plane, aeroplane, airplane (more formal)
-طايَش/طايشة،ـين		TRUE	FALSE	TRUE	irresponsible, unreliable, scatterbrained, rash
+طايَش/طايشة،طايشين		TRUE	FALSE	TRUE	irresponsible, unreliable, scatterbrained, rash
 طايفة/طائِفة،طَوايَف/طَوائَف		FALSE	FALSE	TRUE	(religious) community, denomination, sect
 طائِفِيّة		FALSE	FALSE	TRUE	sectarianism
 طَب		FALSE	FALSE	FALSE	well.. (short)
@@ -3533,7 +3528,7 @@ term	pl	pl_sound	fem_pl	fem	def
 طَريق،طُرُق		FALSE	FALSE	FALSE	way, road, track, highway, route
 طَريق،طُرُق	FALSE	FALSE		FALSE	way
 طَريقة،طُرُق		FALSE	FALSE	TRUE	way, method, system
-طُزّ!ـ		FALSE	FALSE	FALSE	so what! who cares!
+طُزّ		FALSE	FALSE	FALSE	so what! who cares!
 طُشت،طشوت/طشوتة		FALSE	FALSE	TRUE	bowl, basin (for laundry)
 طَطلي/طَطلة،طَطالي		FALSE	FALSE	TRUE	jam, jelly
 طَطْلي\طَطْلة،طَطَالي	FALSE	FALSE		FALSE	jam, jelly
@@ -3833,7 +3828,7 @@ term	pl	pl_sound	fem_pl	fem	def
 عَلى طول	FALSE	FALSE		FALSE	straight ahead
 عَلى فِكْرة	FALSE	FALSE		FALSE	by the way
 عَلَى كُلّ حال	FALSE	FALSE		FALSE	anyway
-عَلى،عــ	FALSE	FALSE		FALSE	on, upon, on top of
+عَلى،ع	FALSE	FALSE		FALSE	on, upon, on top of
 عَمّ،عْمَام	FALSE	FALSE		FALSE	paternal uncle
 عُمّاد		FALSE	FALSE	FALSE	baptism
 عَمار		FALSE	FALSE	FALSE	building, construction, prosperity
@@ -5002,8 +4997,7 @@ term	pl	pl_sound	fem_pl	fem	def
 مُحافَظة		FALSE	FALSE	TRUE	preservation, conservation
 مُحاكَمة		FALSE	TRUE	TRUE	trial
 مُحاماة		FALSE	FALSE	TRUE	law, the legal profession
-مُحامي،ـين/ـية		TRUE	FALSE	TRUE	lawyer, advocate, counsel
-مُحامي،مُحاميّة،مُحامين	FALSE	FALSE		FALSE	lawyer
+مُحامي،مُحاميّة،مُحامين	FALSE	FALSE		FALSE	lawyer, advocate, counsel
 مُحاوَلة		FALSE	TRUE	TRUE	attempt
 مَحّاية		FALSE	TRUE	TRUE	rubber, eraser
 مُحايَد		TRUE	TRUE	TRUE	neutral
@@ -5533,7 +5527,7 @@ term	pl	pl_sound	fem_pl	fem	def
 مِعدة		FALSE	FALSE	TRUE	stomach
 مَعدَن،مَعادَن		FALSE	FALSE	FALSE	metal
 مُعدي		FALSE	FALSE	TRUE	infectious, contagious
-ـمَعرَج		FALSE	FALSE	FALSE	Mohammed's ascension to heaven
+مَعرَج		FALSE	FALSE	FALSE	Mohammed's ascension to heaven
 مَعرَض،مَعارَض		FALSE	FALSE	FALSE	exhibition
 مَعرِفة،مَعارَف		FALSE	FALSE	TRUE	knowledge, information, acquaintance, friend
 مَعرَكة،مَعارَك		FALSE	FALSE	TRUE	battle, campaign
@@ -6461,8 +6455,7 @@ term	pl	pl_sound	fem_pl	fem	def
 وَلدان		TRUE	TRUE	TRUE	born
 وَلدانة		FALSE	FALSE	TRUE	childishness
 وَلَك		FALSE	FALSE	FALSE	you, hey you, what's all this, what are you up to, I'm warning you
-وَلَو		FALSE	FALSE	FALSE	even if..
-وَلَو!!،وَلَوّ!!ـ		FALSE	FALSE	FALSE	come on!, forget it!, don't you dare!, oh really?!, wow!
+وَلَو		FALSE	FALSE	FALSE	even if.., come on!, forget it!, don't you dare!, oh really?!, wow!
 وَلوَلة		FALSE	FALSE	TRUE	wailing, howling, lament
 وَلي،أَولِياء		FALSE	FALSE	TRUE	protector, guardian, mentor, saint/holy man (Muslim)
 وِنتى		FALSE	FALSE	FALSE	when? (usually أَيْمتى is used)
