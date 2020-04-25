@@ -1,3 +1,4 @@
+const fs = require('fs');
 const bodyParser = require("body-parser");
 const express = require('express');
 const hbs = require('hbs');
@@ -14,6 +15,7 @@ app.use('/assets', express.static('assets'));
 app.listen(3000);
 
 const DELIMS = /([^\u0621-\u0653])/g;
+const ARABIC = /^([\u0621-\u0653 ،,/\\\;:\-]+$)/g;
 
 app.post('/', function (req, res) {
     return process(req, res, req.body.content);
@@ -25,6 +27,10 @@ app.get('/', function (req, res) {
 
 app.get('/search', function (req, res) {
     return processSearch(req, res, req.query.q);
+});
+
+app.get('/add', function (req, res) {
+    return processAdd(req, res);
 });
 
 function process(req, res, content) {
@@ -68,6 +74,70 @@ function processSearch(req, res, q) {
         q: q,
         results: results
     });
+}
+
+function processAdd(req, res) {
+    var errors = new Array();
+    var pos = req.query.pos;
+    var word = req.query.word;
+    var past = req.query.past;
+    var pres = req.query.pres;
+    var def = req.query.def;
+    if (!pos || pos.trim() == '')
+        errors.push("Part of Speech cannot be blank");
+    if (pos && !pos.match(/^(stop|verbs|words)$/))
+        errors.push("Invalid part of speech");
+    if (pos && pos == 'verbs') {
+        if (!past || past.trim() == '')
+            errors.push("Past tense cannot be blank");
+        if (!pres || pres.trim() == '')
+            errors.push("Present tense cannot be blank");
+        if (past && !past.match(ARABIC))
+            errors.push("Past tense must in Arabic");
+        if (pres && !pres.match(ARABIC))
+            errors.push("Present tense must in Arabic");
+        if (pres && !pres.startsWith('ي'))
+            errors.push("Present tense must start with ي");
+    } else {
+        if (!word || word.trim() == '')
+            errors.push("Word cannot be blank");
+        if (word && !word.match(ARABIC))
+            errors.push("Word must in Arabic");
+    }
+    if (!def || def.trim() == '')
+        errors.push("Definition cannot be blank");
+    
+    if (errors.length == 0) {
+        var filename = __dirname + '/assets/levantine.arabic.' + pos + '.tsv';
+        var fd;
+        try {
+            fd = fs.openSync(filename, 'a');
+            if (pos == 'verbs')
+                fs.appendFileSync(fd, '\r\n' + past + '\t' + pres + '\t0\t' + def);
+            else
+                fs.appendFileSync(fd, '\r\n' + word + '\t' + def);
+            definer.DICTS.forEach(function(dict) {
+                dict.init();
+            });
+        } catch (e) {
+            errors.push(e);
+        } finally {
+            if (fd) fs.closeSync(fd);
+        }
+    }
+
+    if (errors.length > 0) {
+        res.render('search.hbs', {
+            errors: errors
+        });
+    } else {
+        if (pos == 'verb')
+            word = past;
+        res.render('search.hbs', {
+            q: word,
+            success: 'New word successfully added'
+        });
+    }
 }
 
 hbs.registerHelper('islinefeed', function (value) {

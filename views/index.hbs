@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <title>Arabic Reader</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-     <link rel="stylesheet" href="/assets/styles.css" />
+    <link rel="stylesheet" href="/assets/styles.css" />
 </head>
 
 <body>
@@ -22,13 +22,13 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/search">Search <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/search">Dictionary</span></a>
                 </li>
             </ul>
-            <form action="/search" class="form-inline my-2 my-lg-0">
+            <form title="Levantine Dictionary" action="/search" class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" name="q">
                 <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
             </form>
@@ -37,10 +37,9 @@
 
     {{#unless content}}
     <div class="jumbotron">
-        <h1 class="display-7">Welcome Arabic dialect language learner! </h1>
-        <p class="lead">Give this tool any text or article written in the Levantine Arabic dialect,
-            and it will attempt to give you a definition for each word to help make it easy to read
-            and learn spoken Arabic. <strong>Happy learning while reading!</strong></p>
+        <h1 class="display-7">Welcome Levantine Arabic dialect language learner! </h1>
+        <div class="lead">Get word for word definitions for any text or article written in the Levantine Arabic dialect,
+            spoken in Palestine, Jordan, Lebanon, and Syria. <strong>Happy learning!</strong></div>
     </div>
     {{/unless}}
 
@@ -83,9 +82,9 @@
                     data-content="{{#each stems}}<span lang=ar><strong>{{this.term}}</strong></span> ({{this.pos}})<p>{{#if this.exact}}<strong>{{this.def}}</strong>{{else}}{{this.def}}{{/if}}</p>{{/each}}">
                     {{#if this.match}}
                     {{#if this.exact}}
-                        <strong>{{this.word}}</strong>
+                    <strong>{{this.word}}</strong>
                     {{else}}
-                        {{this.word}}
+                    {{this.word}}
                     {{/if}}
                     {{else}}
                     <span class="word isnotfound">{{this.word}}</span>
