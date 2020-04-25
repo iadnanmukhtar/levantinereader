@@ -29,7 +29,8 @@ app.get('/search', function (req, res) {
 
 function process(req, res, content) {
     var defs = {};
-    if (content !== undefined) {
+    if (content) {
+        content = utils.fixContent(content);
         defs = new Array();
         var tokens = content.split(DELIMS);
         for (var i = 0; i < tokens.length; i++) {
@@ -57,7 +58,7 @@ function process(req, res, content) {
 
 function processSearch(req, res, q) {
     var results = new Array();
-    if (q && q != "" && !q.match(/^\s$/) && q.length > 2) {
+    if (q && q != "" && !q.match(/^\s$/) && q.length > 1) {
         q = utils.normalizeArabic(utils.stripArabicDiacritics(q));
         for (var i = 0; i < definer.DICTS.length; i++) {
             results = results.concat(definer.DICTS[i].search(q));
