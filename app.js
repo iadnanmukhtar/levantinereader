@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use('/assets', express.static('assets'));
+app.use('/', express.static('assets'));
 app.listen(3000);
 
 const DELIMS = /([^\u0621-\u0653])/g;
