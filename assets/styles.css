@@ -24,6 +24,10 @@ textarea {
     width: 100%;
 }
 
+.isnotexact {
+    color: orange;
+}
+
 .isnotfound {
     color: red;
 }
