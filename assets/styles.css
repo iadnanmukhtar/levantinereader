@@ -1,13 +1,19 @@
 @import url(//fonts.googleapis.com/earlyaccess/notonaskharabic.css);
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
     background-color: #fafafa;
+    font-family: Roboto, sans-serif;
 }
 
 [lang="ar"] {
     direction: rtl;
     font-size: 24px;
     font-family: 'Noto Naskh Arabic', Calibri, serif;
+}
+
+[lang="en"] {
+    font-family: Roboto, sans-serif;
 }
 
 .pt-3-half {
@@ -36,4 +42,12 @@ textarea {
 
 .h1-r {
     font-size: 24px;
+}
+
+.tippy-content {
+    max-height: 300px;
+    max-width: 300px;
+    overflow-y: auto;
+    text-align: left;
+    direction: ltr;
 }
