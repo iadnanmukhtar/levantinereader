@@ -1,3 +1,4 @@
+"use strict";
 const fs = require('fs');
 const bodyParser = require("body-parser");
 const express = require('express');
@@ -112,6 +113,7 @@ function processAdd(req, res) {
         var filename = __dirname + '/assets/levantine.arabic.' + pos + '.tsv';
         var fd;
         try {
+            utils.notifyOnNewWord(pos, word, def);
             fd = fs.openSync(filename, 'a');
             if (pos == 'verbs')
                 fs.appendFileSync(fd, '\r\n' + past + '\t' + pres + '\t0\t' + def);
@@ -120,7 +122,10 @@ function processAdd(req, res) {
             definer.DICTS.forEach(function(dict) {
                 dict.init();
             });
+            if (pos == 'verbs')
+                word = past + " : " + pres; 
         } catch (e) {
+            utils.notifyOnError('Unable to add new word', e).catch(console.error);
             errors.push(e);
         } finally {
             if (fd) fs.closeSync(fd);
