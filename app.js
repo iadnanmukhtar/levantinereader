@@ -4,6 +4,7 @@ const express = require('express');
 const hbs = require('hbs');
 const definer = require('./lib/definer');
 const DictionaryStore = require('./lib/DictionaryStore');
+const Notifier = require('./lib/Notifier');
 const utils = require('./lib/utils');
 
 var app = express();
@@ -118,7 +119,7 @@ function processAdd(req, res) {
                     terms1: '',
                     def: def
                 }, function (result) {
-                    utils.notifyOnNewWord(pos, word, def);
+                    Notifier.notifyOnNewWord(pos, word, def);
                 });
             else
                 DictionaryStore.add({
@@ -127,13 +128,13 @@ function processAdd(req, res) {
                     terms1: pres,
                     def: def
                 }, function (result) {
-                    utils.notifyOnNewWord(pos, past + "،" + pres, def);
+                    Notifier.notifyOnNewWord(pos, past + "،" + pres, def);
                 });
             definer.DICTS.forEach(function (dict) {
                 dict.init();
             });
         } catch (e) {
-            utils.notifyOnError('Unable to add new word', e).catch(console.error);
+            Notifier.notifyOnError('Unable to add new word', e).catch(console.error);
             errors.push(e);
         }
     }
