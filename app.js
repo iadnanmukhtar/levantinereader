@@ -1,9 +1,9 @@
 "use strict";
-const fs = require('fs');
 const bodyParser = require("body-parser");
 const express = require('express');
 const hbs = require('hbs');
 const definer = require('./lib/definer');
+const DictionaryStore = require('./lib/DictionaryStore');
 const utils = require('./lib/utils');
 
 var app = express();
@@ -67,7 +67,7 @@ function process(req, res, content) {
 function processSearch(req, res, q) {
     var results = new Array();
     if (q && q != "" && !q.match(/^\s$/) && q.length > 1) {
-        q = utils.normalizeArabic(utils.stripArabicDiacritics(q));
+        q = utils.normalizeArabic(utils.stripArabicDiacritics(q.toLowerCase()));
         for (var i = 0; i < definer.DICTS.length; i++) {
             results = results.concat(definer.DICTS[i].search(q));
         }
@@ -87,9 +87,9 @@ function processAdd(req, res) {
     var def = req.query.def;
     if (!pos || pos.trim() == '')
         errors.push("Part of Speech cannot be blank");
-    if (pos && !pos.match(/^(stop|verbs|words)$/))
+    if (pos && !pos.match(/^(stop|verb|word)$/))
         errors.push("Invalid part of speech");
-    if (pos && pos == 'verbs') {
+    if (pos && pos == 'verb') {
         if (!past || past.trim() == '')
             errors.push("Past tense cannot be blank");
         if (!pres || pres.trim() == '')
@@ -108,27 +108,33 @@ function processAdd(req, res) {
     }
     if (!def || def.trim() == '')
         errors.push("Definition cannot be blank");
-    
+
     if (errors.length == 0) {
-        var filename = __dirname + '/assets/levantine.arabic.' + pos + '.tsv';
-        var fd;
         try {
-            utils.notifyOnNewWord(pos, word, def);
-            fd = fs.openSync(filename, 'a');
-            if (pos == 'verbs')
-                fs.appendFileSync(fd, '\r\n' + past + '\t' + pres + '\t0\t' + def);
+            if (pos != 'verb')
+                DictionaryStore.add({
+                    pos: pos,
+                    terms0: word,
+                    terms1: '',
+                    def: def
+                }, function (result) {
+                    utils.notifyOnNewWord(pos, word, def);
+                });
             else
-                fs.appendFileSync(fd, '\r\n' + word + '\t' + def);
-            definer.DICTS.forEach(function(dict) {
+                DictionaryStore.add({
+                    pos: pos,
+                    terms0: past,
+                    terms1: pres,
+                    def: def
+                }, function (result) {
+                    utils.notifyOnNewWord(pos, past + "،" + pres, def);
+                });
+            definer.DICTS.forEach(function (dict) {
                 dict.init();
             });
-            if (pos == 'verbs')
-                word = past + " : " + pres; 
         } catch (e) {
             utils.notifyOnError('Unable to add new word', e).catch(console.error);
             errors.push(e);
-        } finally {
-            if (fd) fs.closeSync(fd);
         }
     }
 
