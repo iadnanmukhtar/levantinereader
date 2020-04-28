@@ -62,3 +62,9 @@ textarea {
     text-align: left;
     direction: ltr;
 }
+
+.media img {
+    object-fit: cover;
+    width: 80px;
+    height: 80px;
+}
