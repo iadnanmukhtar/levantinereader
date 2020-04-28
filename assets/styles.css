@@ -48,6 +48,13 @@ textarea {
     font-size: 24px;
 }
 
+.def-box {
+    background-color: white;
+    margin: 0.5em;
+    padding: 1em;
+    border: 2px solid blue;
+}
+
 .tippy-content {
     max-height: 300px;
     max-width: 300px;

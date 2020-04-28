@@ -12,6 +12,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XHPNPS9B36"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
+
         function gtag() {
             dataLayer.push(arguments);
         }
@@ -42,8 +43,7 @@
 
     <nav class="navbar navbar-expand-md navbar-dark bg-primary">
         <a class="navbar-brand" href="/">
-            <img src="/assets/icon.png" width="30" height="30"
-                class="d-inline-block align-top" alt="Flag of Jordan">
+            <img src="/assets/icon.png" width="30" height="30" class="d-inline-block align-top" alt="Flag of Jordan">
             Arabic Reader
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -85,8 +85,8 @@
                             <label for="content">
                                 <h5 class="display-5">Type-in any Levantine Arabic text:</h5>
                             </label>
-                            <textarea class="form-control" lang="ar" name="content" rows="4"
-                                placeholder="أكتب أي مقالة باللغة الشامية (العامية)">{{content}}</textarea>
+                            <textarea class="form-control" autofocus lang="ar" name="content" rows="3"
+                                placeholder="أكتب أي مقالة باللهجة الشامية العامية">{{#unless content}}أكتب أي مقالة باللهجة الشامية العامية{{else}}{{content}}{{/unless}}</textarea>
                         </div>
                     </div>
                     <div class="row mt-2">
@@ -101,13 +101,12 @@
         {{#if content}}
         <div class="row mt-3">
             <div class="col mt-3">
-                <h5 class="display-5">Click on the words to get definitions:</h5>
+                <h5>Click on the words to get definitions:</h5>
             </div>
         </div>
-        {{/if}}
 
         <div class="row mt-1">
-            <div class="col text-right" lang="ar">
+            <div class="col text-right def-box" lang="ar">
                 {{#each words}}
                 {{#unless this.delim}}
                 <a tabindex="{{@index}}" class="word" title="{{this.word}}"
@@ -131,6 +130,139 @@
                 {{/unless}}
                 {{/each}}
             </div>
+        </div>
+        {{/if}}
+
+        <div class="jumbotron mt-4 mb-4">
+            <h3 class="display-6">Can't find the correct definition?</h3>
+            <p class="lead">One of the reasons a correct definition cannot be found is that an appropriate
+                word or verb may not exist in the app's dictionary. Help contribute by adding words to the app
+                dictionary by clicking the button below.
+            </p>
+            <a class="btn btn-success btn-lg" href="/search" role="button">Add a New Word</a>
+        </div>
+
+        <div class="row mt-5">
+
+            <div class="col">
+
+                <h4 class="mb-3">Levantine Arabic Resources</h4>
+
+                <div class="list-group">
+                    <a href="http://www.livingarabic.com/dictionaries?dc=2&st=1" target="samples"
+                        class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><strong>Levantine Arabic Dictionary</strong></h5>
+                            <small>Source: Lughatuna</small>
+                        </div>
+                        <p>
+                            This site is an effort to show Arabic as a living language by allowing users to search in
+                            both a Classical Arabic dictionary and a dialect dictionary at the same time.
+                        </p>
+                    </a>
+                    <a href="https://www.youtube.com/playlist?list=PLsRcJmc7xsAW-872drN6qo9tKm-wtijn2" target="samples"
+                        class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><strong>Abu Sanad's Family</strong></h5>
+                            <small>Source: Our Family Blog</small>
+                        </div>
+                        <p>
+                            Abu Sanad’s Family (عيلة أبو سند) is an animated YouTube series by Our Family Life
+                            that’s has both Levantine/Jordanian Arabic captains/subtitles. I know this will help me
+                            tremendously and I hope it helps you too.
+                        </p>
+                    </a>
+                    <a href="https://langmedia.fivecolleges.edu/culturetalk/Arab-Levant" target="samples"
+                        class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><strong>CultureTalk Arab Levant: Video Pages by Topic</strong></h5>
+                            <small>Source: LangMedia CultureTalk</small>
+                        </div>
+                        <p>
+                            CultureTalk features video clips of interviews and discussions with people from many
+                            different countries and of many different ages and walks of life. Some interviews and
+                            discussions are in English; more are in languages other than English. Translations and/or
+                            transcripts are given for all non-English video clips.
+                        </p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-5">
+
+            <div class="col">
+
+                <h4 class="mb-3">Sample Texts in Levantine Dialect</h4>
+
+                <div class="list-group">
+                    <a href="https://www.facebook.com/DeekBlog/posts/347423415382455" target="samples"
+                        class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><strong>White Twix</strong></h5>
+                            <small>Source: Deek Blog</small>
+                        </div>
+                        <p>
+                            Have you ever stood on your balcony and glanced at Amman? You'll see windows with lights
+                            turned off and some with dimmed lights. Behind each window
+                            there is a girl with her head on the pillow and asking her Lord for speacial things in her
+                            life and about her beauty...</p>
+                        <p class="mb-1 text-right" lang="ar">
+                            لو عمرك وقفت على بلكونتك بالليل، وألقيت نظرة على عمّان، راح تشوف شبابيك كثير ضوها مطفي،
+                            ومنها ضوّه خافت.. ورا كل شباك فيهم، في بنت حاطّة راسها عالمخدة.. و بتطلب من ربّنا شي خاصّ
+                            بجمالها او بحياتها...</p>
+                    </a>
+                    <a href="https://lingualism.com/arabic/levantine-arabic/levantine-arabic-diaries/around-dubai/"
+                        target="samples" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><strong>Around Dubai</strong></h5>
+                            <small>Source: Lingualism</small>
+                        </div>
+                        <p>
+                            Dubai is a beautiful city. A lot of my friends who live in America ask me about life in
+                            Dubai, and whenever I explain to them about life here, they immediately tell me that they
+                            feel like Dubai is full of adventures and fun...</p>
+                        <p class="mb-1 text-right" lang="ar">
+                            دبي مدينة كتير حلوة. كتير من رفقاتي اللي العيشين بأمريكا بسألوني عن العشية بدبي. و كل ما
+                            إشرحلون عن الحياة هون، دغري بقلولي إنو بجسو إنو عشية دبي ملينة مغمرات و تسلية...
+                        </p>
+                    </a>
+                    <a href="https://lingualism.com/arabic/levantine-arabic/levantine-arabic-diaries/a-vulnerable-patient/"
+                        target="samples" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><strong>A Vulnerable Patient</strong></h5>
+                            <small>Source: Lingualism</small>
+                        </div>
+                        <p>
+                            You won’t believe what happened when dad was at the hospital. We were in a room with an old
+                            vulnerable lady with nobody to protect her. She was in a lot of pain which is normal; she
+                            wasn’t there for fun...</p>
+                        <p class="mb-1 text-right" lang="ar">
+                            ما راح تصدقوا شو صار معي بس كان بيي بالمستشفى. كنّا بغرفة مع ستّ ختيارة ما في حدا يدافع عنا.
+                            هي كتير موجوعة وهيدا شي طبيعي مش عم تتسلى...
+                        </p>
+                    </a>
+                    <a href="https://lingualism.com/arabic/levantine-arabic/levantine-arabic-diaries/my-birthday-in-berlin/"
+                        target="samples" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><strong>My Birthday in Berlin</strong></h5>
+                            <small>Source: Lingualism</small>
+                        </div>
+                        <p>
+                            Last week was my birthday. Therefore, my girlfriend and I decided to go to Berlin. On one
+                            hand, it would be a tour(istic trip) [lit. tourism] as the summer is about to finish. On the
+                            other hand, we could celebrate my birthday there, although I’m not really into things like
+                            birthdays...</p>
+                        <p class="mb-1 text-right" lang="ar">
+                            الأسبوع الماضي كان عيد ميلادي. و منشان هيك قررت انا و رفيقتي نروح ع برلين. منو سياحة كونو
+                            الصيف رح يخلص. ومنو منحتفل بعيد ميلادي هنيك. بالرغم اني انا مو كتير بحب شغلات أعياد
+                            الميلاد...
+                        </p>
+                    </a>
+                </div>
+            </div>
+
         </div>
 
     </main>
