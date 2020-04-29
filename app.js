@@ -36,6 +36,12 @@ app.get('/add', function (req, res) {
     return processAdd(req, res);
 });
 
+app.get('/refresh', function (req, res) {
+    processRefresh(req, res);
+    res.sendStatus(200);
+    return;
+});
+
 function process(req, res, content) {
     var defs = {};
     if (content) {
@@ -77,6 +83,13 @@ function processSearch(req, res, q) {
         q: q,
         results: results
     });
+}
+
+function processRefresh(req, res) {
+    definer.DICTS.forEach(function (dict) {
+        dict.init();
+    });
+    return;
 }
 
 function processAdd(req, res) {
