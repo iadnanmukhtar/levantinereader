@@ -86,7 +86,7 @@
                                 <h5 class="display-5">Type-in any Levantine Arabic text:</h5>
                             </label>
                             <textarea class="form-control" lang="ar" name="content" rows="3"
-                                placeholder="أكتب أي مقالة باللهجة الشامية العامية">{{#unless content}}أكتب أي مقالة باللهجة الشامية العامية{{else}}{{content}}{{/unless}}</textarea>
+                                placeholder="أكتب أي مقالة باللهجة الشامية العامية">{{#unless content}}هاي جملة بسيطة{{else}}{{content}}{{/unless}}</textarea>
                         </div>
                     </div>
                     <div class="row mt-2">
@@ -131,6 +131,9 @@
                 {{/each}}
             </div>
         </div>
+        {{else}}
+        <img class="mt-3" src="/assets/demo.gif" alt="Levantine Arabic Reader Demo" width="100%" />
+        <p class="text-center text-muted"><small>The above animation is only a demo.</small></p>
         {{/if}}
 
         <div class="jumbotron mt-4 mb-4">
@@ -139,7 +142,7 @@
                 word or verb may not exist in the app's dictionary. Help contribute by adding words to the app
                 dictionary by clicking the button below.
             </p>
-            <a class="btn btn-success btn-lg" href="/search" role="button">Add a New Word</a>
+            <a class="btn btn-success" href="/search" role="button">Add a New Word</a>
         </div>
 
         <div class="row mt-5">
