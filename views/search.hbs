@@ -44,7 +44,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-primary">
         <a class="navbar-brand" href="/">
             <img src="/assets/icon.png" width="30" height="30" class="d-inline-block align-top" alt="Flag of Jordan">
-            Arabic Reader
+            Levantine Reader
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,7 +122,7 @@
                                     contenteditable="true" lang="ar">
                                     <strong>{{this.terms0}}</strong></td>
                                 <td class="terms1 pt-3-half text-center {{#if this.deleted}}deleted{{/if}}"
-                                    contenteditable="true" lang="ar">
+                                    {{#if (eq this.pos 'verb')}}contenteditable="true"{{/if}} lang="ar">
                                     {{this.terms1}}</td>
                                 <td class="def pt-3-half {{#if this.deleted}}deleted{{/if}}" contenteditable="true">
                                     {{this.def}}</td>
@@ -178,11 +178,11 @@
                                 <label for="pos">Part of Speech</label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="pos" id="pos-word" value="word" checked>
-                                    <label class="form-check-label" for="exampleRadios1">Word (non-verb)</label>
+                                    <label class="form-check-label" for="pos-word">General (non-verb)</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="pos" id="pos-verb" value="verb">
-                                    <label class="form-check-label" for="exampleRadios2">Verb</label>
+                                    <label class="form-check-label" for="pos-verb">Verb</label>
                                 </div>
                             </div>
                             <div id="wordGroup" class="form-group">
@@ -250,7 +250,7 @@
             if ($(this).hasClass('enabled')) {
                 var id = $(this).parent().parent().data('id');
                 var terms0 = $('[data-id=' + id + '] .terms0').text();
-                var terms1 = $('[data-id=' + id + '] .terms0').text();
+                var terms1 = $('[data-id=' + id + '] .terms1').text();
                 var def = $('[data-id=' + id + '] .def').text();
                 jQuery.get('/update', {
                     id: id,
@@ -265,7 +265,7 @@
         $('.btn-delete').click(function () {
             var id = $(this).parent().parent().data('id');
             var terms0 = $('[data-id=' + id + '] .terms0').text();
-            var terms1 = $('[data-id=' + id + '] .terms0').text();
+            var terms1 = $('[data-id=' + id + '] .terms1').text();
             var def = $('[data-id=' + id + '] .def').text();
             if (confirm('Are you sure you want to delete the word: ' + terms0)) {
                 jQuery.get('/delete', {

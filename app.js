@@ -16,8 +16,8 @@ app.use('/assets', express.static('assets'));
 app.use('/', express.static('assets'));
 app.listen(3000);
 
-const DELIMS = /([^\u0621-\u0653])/g;
-const ARABIC = /^([\u0621-\u0653 ،,/\\\;:\-]+$)/g;
+const DELIMS = /([^\u0620-\u066a\u066e-\u06d3\u06d5\u06ee-\u06ff\p{P}])/g;
+const ARABIC = /^([\u0600-\u06ff .,\/\\]+)$/g;
 
 app.post('/', function (req, res) {
     return process(req, res, req.body.content);
@@ -125,6 +125,14 @@ async function processAdd(req, res) {
     if (!def || def.trim() == '')
         errors.push("Definition cannot be blank");
 
+    pos = pos.trim();
+    def = def.trim();
+    if (word)
+        word = word.trim();
+    if (pres)
+        pres = pres.trim();
+    if (past)
+        past = past.trim();
     if (errors.length == 0) {
         try {
             if (pos == 'verb')
@@ -142,10 +150,8 @@ async function processAdd(req, res) {
             errors: errors
         });
     } else {
-        if (pos == 'verb')
-            word = past;
         res.render('search.hbs', {
-            q: word,
+            q: def,
             success: 'New word successfully added'
         });
     }
@@ -155,7 +161,7 @@ function processUpdate(req, res) {
     var id = req.query.id;
     var terms0 = req.query.terms0.trim();
     var terms1 = req.query.terms1.trim();
-    var def = req.query.def;
+    var def = req.query.def.trim();
     try {
         Matcher.updateWord(id, terms0, terms1, def);
         res.status(200).send('ID ' + id + ' updated');
@@ -184,4 +190,8 @@ function processRefresh(req, res) {
 
 hbs.registerHelper('islinefeed', function (value) {
     return (value == '\n');
+});
+
+hbs.registerHelper('eq', function (value1, value2) {
+    return value1 == value2;
 });
