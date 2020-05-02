@@ -18,6 +18,7 @@
         gtag('js', new Date());
         gtag('config', 'G-XHPNPS9B36');
     </script>
+    <script src="https://use.fontawesome.com/0732e6dddb.js"></script>
     <script data-ad-client="ca-pub-1199080602686133" async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
@@ -109,16 +110,31 @@
                                 <th class="text-center">Primary</th>
                                 <th class="text-center">Related</th>
                                 <th>Definition</th>
+                                <th class="text-center">Update</th>
                             </tr>
                         </thead>
                         <tbody>
                             {{#each results}}
-                            <tr>
-                                <td class="pt-3-half" contenteditable="true">{{this.pos}}</td>
-                                <td class="pt-3-half text-center" contenteditable="true" lang="ar">
-                                    <strong>{{this.main}}</strong></td>
-                                <td class="pt-3-half text-center" contenteditable="true" lang="ar">{{this.term}}</td>
-                                <td class="pt-3-half" contenteditable="true">{{this.def}}</td>
+                            <tr data-id="{{this.id}}">
+                                <td class="pt-3-half">{{this.pos}}</td>
+                                <td title="{{this.id}}"
+                                    class="terms0 pt-3-half text-center {{#if this.deleted}}deleted{{/if}}"
+                                    contenteditable="true" lang="ar">
+                                    <strong>{{this.terms0}}</strong></td>
+                                <td class="terms1 pt-3-half text-center {{#if this.deleted}}deleted{{/if}}"
+                                    contenteditable="true" lang="ar">
+                                    {{this.terms1}}</td>
+                                <td class="def pt-3-half {{#if this.deleted}}deleted{{/if}}" contenteditable="true">
+                                    {{this.def}}</td>
+                                {{#unless this.deleted}}
+                                <td class="pt-3-half text-center update">
+                                    <i class="fa fa-save btn-save"></i>
+                                    &nbsp;
+                                    <i class="fa fa-trash btn-delete"></i>
+                                </td>
+                                {{else}}
+                                <td></td>
+                                {{/unless}}
                             </tr>
                             {{/each}}
                         </tbody>
@@ -160,11 +176,14 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="pos">Part of Speech</label>
-                                <select class="form-control" id="pos" name="pos">
-                                    <option value="word">General</option>
-                                    <option value="stop">Stop Word</option>
-                                    <option value="verb">Verb</option>
-                                </select>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="pos" id="pos-word" value="word" checked>
+                                    <label class="form-check-label" for="exampleRadios1">Word (non-verb)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="pos" id="pos-verb" value="verb">
+                                    <label class="form-check-label" for="exampleRadios2">Verb</label>
+                                </div>
                             </div>
                             <div id="wordGroup" class="form-group">
                                 <label for="word">Word</label>
@@ -210,21 +229,52 @@
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="/assets/editable-table.js"></script>
     <script>
-        $('#pos').on('change', function () {
-            var selection = $(this).val();
-            switch (selection) {
-                case 'verb':
-                    $('#tensesGroup').removeClass('d-none');
-                    $('#wordGroup').addClass('d-none');
-                    break;
-                default:
-                    $('#tensesGroup').addClass('d-none');
-                    $('#wordGroup').removeClass('d-none');
+        $('#pos-word').click(function () {
+            $('#tensesGroup').addClass('d-none');
+            $('#wordGroup').removeClass('d-none');
+        });
+        $('#pos-verb').click(function () {
+            $('#tensesGroup').removeClass('d-none');
+            $('#wordGroup').addClass('d-none');
+        });
+        $('[contenteditable=true]').on('input', function () {
+            var id = $(this).parent().data('id');
+            $('[data-id=' + id + '] .btn-save').addClass('enabled');
+        });
+        $('.btn-save').click(function () {
+            if ($(this).hasClass('enabled')) {
+                var id = $(this).parent().parent().data('id');
+                var terms0 = $('[data-id=' + id + '] .terms0').text();
+                var terms1 = $('[data-id=' + id + '] .terms0').text();
+                var def = $('[data-id=' + id + '] .def').text();
+                jQuery.get('/update', {
+                    id: id,
+                    terms0: terms0,
+                    terms1: terms1,
+                    def: def
+                }, function (data) {
+                    $('[data-id=' + id + '] .btn-save').removeClass('enabled');
+                });
+            }
+        });
+        $('.btn-delete').click(function () {
+            var id = $(this).parent().parent().data('id');
+            var terms0 = $('[data-id=' + id + '] .terms0').text();
+            var terms1 = $('[data-id=' + id + '] .terms0').text();
+            var def = $('[data-id=' + id + '] .def').text();
+            if (confirm('Are you sure you want to delete the word: ' + terms0)) {
+                jQuery.get('/delete', {
+                    id: id,
+                    terms0: terms0,
+                    terms1: terms1
+                }, function (data) {
+                    location.reload();
+                });
             }
         });
     </script>

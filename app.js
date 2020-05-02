@@ -2,8 +2,7 @@
 const bodyParser = require("body-parser");
 const express = require('express');
 const hbs = require('hbs');
-const definer = require('./lib/definer');
-const DictionaryStore = require('./lib/DictionaryStore');
+const Matcher = require('./lib/Matcher');
 const Notifier = require('./lib/Notifier');
 const utils = require('./lib/utils');
 
@@ -36,6 +35,14 @@ app.get('/add', function (req, res) {
     return processAdd(req, res);
 });
 
+app.get('/update', function (req, res) {
+    return processUpdate(req, res);
+});
+
+app.get('/delete', function (req, res) {
+    return processDelete(req, res);
+});
+
 app.get('/refresh', function (req, res) {
     processRefresh(req, res);
     res.sendStatus(200);
@@ -52,7 +59,7 @@ function process(req, res, content) {
             var token = tokens[i];
             if (token !== "") {
                 if (!token.match(DELIMS)) {
-                    var def = definer.define(token);
+                    var def = Matcher.match(token);
                     defs.push(def);
                 } else {
                     defs.push({
@@ -75,8 +82,10 @@ function processSearch(req, res, q) {
     var results = new Array();
     if (q && q != "" && !q.match(/^\s$/) && q.length > 1) {
         q = utils.normalizeArabic(utils.stripArabicDiacritics(q.toLowerCase()));
-        for (var i = 0; i < definer.DICTS.length; i++) {
-            results = results.concat(definer.DICTS[i].search(q));
+        for (var i = 0; i < Matcher.DICTS.length; i++) {
+            var subresults = Matcher.DICTS[i].search(q);
+            for (var j = 0; j < subresults.length; j++)
+                utils.pushUniqueObject(results, "id", subresults[j].id, subresults[j]);
         }
     }
     res.render('search.hbs', {
@@ -85,14 +94,7 @@ function processSearch(req, res, q) {
     });
 }
 
-function processRefresh(req, res) {
-    definer.DICTS.forEach(function (dict) {
-        dict.init();
-    });
-    return;
-}
-
-function processAdd(req, res) {
+async function processAdd(req, res) {
     var errors = new Array();
     var pos = req.query.pos;
     var word = req.query.word;
@@ -125,27 +127,10 @@ function processAdd(req, res) {
 
     if (errors.length == 0) {
         try {
-            if (pos != 'verb')
-                DictionaryStore.add({
-                    pos: pos,
-                    terms0: word,
-                    terms1: '',
-                    def: def
-                }, function (result) {
-                    Notifier.notifyOnNewWord(pos, word, def);
-                });
+            if (pos == 'verb')
+                Matcher.addVerb(pos, past, pres, def);
             else
-                DictionaryStore.add({
-                    pos: pos,
-                    terms0: past,
-                    terms1: pres,
-                    def: def
-                }, function (result) {
-                    Notifier.notifyOnNewWord(pos, past + "،" + pres, def);
-                });
-            definer.DICTS.forEach(function (dict) {
-                dict.init();
-            });
+                Matcher.addWord(pos, word, def);
         } catch (e) {
             Notifier.notifyOnError('Unable to add new word', e).catch(console.error);
             errors.push(e);
@@ -164,6 +149,37 @@ function processAdd(req, res) {
             success: 'New word successfully added'
         });
     }
+}
+
+function processUpdate(req, res) {
+    var id = req.query.id;
+    var terms0 = req.query.terms0.trim();
+    var terms1 = req.query.terms1.trim();
+    var def = req.query.def;
+    try {
+        Matcher.updateWord(id, terms0, terms1, def);
+        res.status(200).send('ID ' + id + ' updated');
+    } catch (e) {
+        Notifier.notifyOnError('Unable to update word', e).catch(console.error);
+        res.status(403).send(e);
+    }
+}
+
+function processDelete(req, res) {
+    var id = req.query.id;
+    var terms0 = req.query.terms0.trim();
+    var terms1 = req.query.terms1.trim();
+    try {
+        Matcher.deleteWord(id, terms0, terms1);
+        res.status(200).send('ID ' + id + ' deleted');
+    } catch (e) {
+        Notifier.notifyOnError('Unable to delete word', e).catch(console.error);
+        res.status(403).send(e);
+    }
+}
+
+function processRefresh(req, res) {
+    Matcher.refreshAllDicts();
 }
 
 hbs.registerHelper('islinefeed', function (value) {

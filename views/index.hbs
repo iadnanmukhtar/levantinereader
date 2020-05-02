@@ -110,7 +110,7 @@
                 {{#each words}}
                 {{#unless this.delim}}
                 <a tabindex="{{@index}}" class="word" title="{{this.word}}"
-                    data-tippy-content="{{#each stems}}<div class={{#unless this.exact}}isnotexact{{/unless}}><span lang=ar><strong>{{this.term}}</strong></span> <span lang=en>({{this.pos}})</span><p class={{#unless this.exact}}isnotexact{{/unless}}>{{#if this.exact}}<strong lang=en>{{this.def}}</strong>{{else}}{{this.def}}{{/if}}</p></div>{{/each}}">
+                    data-tippy-content="{{#each stems}}<div class={{#unless this.exact}}isnotexact{{/unless}}><span lang=ar><strong>{{this.term}}</strong></span> <span lang=en>({{this.posDesc}})</span><p class={{#unless this.exact}}isnotexact{{/unless}}>{{#if this.exact}}<strong lang=en>{{this.def}}</strong>{{else}}{{this.def}}{{/if}}</p></div>{{/each}}">
                     {{#if this.match}}
                     {{#if this.exact}}
                     <strong>{{this.word}}</strong>

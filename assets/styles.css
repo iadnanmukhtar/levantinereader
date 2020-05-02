@@ -96,3 +96,16 @@ img.demo {
     }
 
 }
+
+.deleted {
+    text-decoration: line-through;
+}
+
+.update {
+    color: gray;
+    font-size: 24px;
+}
+
+.update .enabled {
+    color: red;
+}
