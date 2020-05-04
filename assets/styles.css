@@ -1,6 +1,42 @@
 @import url(//fonts.googleapis.com/earlyaccess/notonaskharabic.css);
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+@font-face {
+    font-family: 'Dubai';
+    src: url('/assets/font/DubaiW23-Light.woff2') format('woff2'),
+        url('/assets/font/DubaiW23-Light.woff') format('woff'),
+        url('/assets/font/DubaiW23-Light.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Dubai';
+    src: url('/assets/font/DubaiW23-Regular.woff2') format('woff2'),
+        url('/assets/font/DubaiW23-Regular.woff') format('woff'),
+        url('/assets/font/DubaiW23-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Dubai';
+    src: url('/assets/font/DubaiW23-Medium.woff2') format('woff2'),
+        url('/assets/font/DubaiW23-Medium.woff') format('woff'),
+        url('/assets/font/DubaiW23-Medium.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Dubai';
+    src: url('/assets/font/DubaiW23-Bold.woff2') format('woff2'),
+        url('/assets/font/DubaiW23-Bold.woff') format('woff'),
+        url('/assets/font/DubaiW23-Bold.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 800;
+}
+
 body {
     background-color: #fafafa;
     font-family: Roboto, sans-serif;
@@ -9,7 +45,7 @@ body {
 [lang="ar"] {
     direction: rtl;
     font-size: 24px;
-    font-family: 'Noto Naskh Arabic', Calibri, serif;
+    font-family: Dubai, 'Noto Naskh Arabic', Calibri, serif;
 }
 
 [lang="en"] {
