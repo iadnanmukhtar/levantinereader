@@ -16,7 +16,7 @@ app.use('/assets', express.static('assets'));
 app.use('/', express.static('assets'));
 app.listen(3000);
 
-const DELIMS = /([^\u0620-\u066a\u066e-\u06d3\u06d5\u06ee-\u06ff\p{P}])/g;
+const DELIMS = /([\s\u0020-\u002f\u003a-\u0040\u005b-\u0060\u007b-\u007f\u0600-\u061f\u06d4-\u06de])/g;
 const ARABIC = /^([\u0600-\u06ff .,\/\\]+)$/g;
 
 app.post('/', function (req, res) {
