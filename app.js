@@ -81,9 +81,9 @@ function process(req, res, content) {
 function processSearch(req, res, q) {
     var results = new Array();
     if (q && q != "" && !q.match(/^\s$/) && q.length > 1) {
-        q = utils.normalizeArabic(utils.stripArabicDiacritics(q.toLowerCase()));
+        var _q = utils.normalizeArabic(utils.stripArabicDiacritics(q.toLowerCase()));
         for (var i = 0; i < Matcher.DICTS.length; i++) {
-            var subresults = Matcher.DICTS[i].search(q);
+            var subresults = Matcher.DICTS[i].search(_q);
             for (var j = 0; j < subresults.length; j++)
                 utils.pushUniqueObject(results, "id", subresults[j].id, subresults[j]);
         }
