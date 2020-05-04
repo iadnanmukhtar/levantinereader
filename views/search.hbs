@@ -101,7 +101,7 @@
 
                 <form action="/search">
                     <section class="input-group mb-3">
-                        <input autofocus type="text" class="form-control" placeholder="Search..." name="q"
+                        <input autofocus lang="ar" type="text" class="form-control" placeholder="ابحث بالعربي أو English" name="q"
                             value="{{q}}">
                         <div class="input-group-append">
                             <button class="btn btn-warning" type="submit">Search</button>
@@ -115,38 +115,39 @@
                 <p class="mt-2">Found {{results.length}} results:</p>
 
                 <section id="table" class="mt-3 table-editable">
-                    <table class="table table-bordered table-responsive-md table-striped">
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                                <th class="text-center">Primary</th>
-                                <th class="text-center">Related</th>
-                                <th>Definition</th>
+                    <table class="table table-bordered table-hover table-responsive-md">
+                        <thead class="thead-dark">
+                            <tr class="table-primary">
+                                <th class="text-center">Type</th>
+                                <th colspan="2" class="text-center">Word</th>
                                 <th class="text-center">Update</th>
                             </tr>
                         </thead>
                         <tbody>
                             {{#each results}}
                             <tr data-id="{{this.id}}">
-                                <td class="pt-3-half">{{this.pos}}</td>
+                                <td rowspan="2" title="{{this.id}}" class="pt-3-half text-center align-middle">
+                                    {{this.pos}}
+                                </td>
+                                <td title="{{this.id}}"
+                                    class="terms1 pt-3-half text-center {{#if this.deleted}}deleted{{/if}}"
+                                    {{#if (eq this.pos 'verb')}}contenteditable="true"{{/if}} lang="ar">
+                                    <strong>{{this.terms1}}</strong></td>
                                 <td title="{{this.id}}"
                                     class="terms0 pt-3-half text-center {{#if this.deleted}}deleted{{/if}}"
                                     contenteditable="true" lang="ar">
                                     <strong>{{this.terms0}}</strong></td>
-                                <td class="terms1 pt-3-half text-center {{#if this.deleted}}deleted{{/if}}"
-                                    {{#if (eq this.pos 'verb')}}contenteditable="true"{{/if}} lang="ar">
-                                    {{this.terms1}}</td>
-                                <td class="def pt-3-half {{#if this.deleted}}deleted{{/if}}" contenteditable="true">
-                                    {{this.def}}</td>
+                                <td rowspan="2" class="pt-3-half text-center align-middle update">
                                 {{#unless this.deleted}}
-                                <td class="pt-3-half text-center update">
                                     <i class="fa fa-save btn-save"></i>
                                     &nbsp;
                                     <i class="fa fa-trash btn-delete"></i>
-                                </td>
-                                {{else}}
-                                <td></td>
                                 {{/unless}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="def pt-3-half {{#if this.deleted}}deleted{{/if}}" contenteditable="true">
+                                    {{this.def}}</td>
                             </tr>
                             {{/each}}
                         </tbody>
