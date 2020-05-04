@@ -126,7 +126,7 @@
                         <tbody>
                             {{#each results}}
                             <tr data-id="{{this.id}}">
-                                <td rowspan="2" title="{{this.id}}" class="pt-3-half text-center align-middle">
+                                <td rowspan="2" title="{{this.id}}" class="pt-3-half separator text-center align-middle">
                                     {{this.pos}}
                                 </td>
                                 <td title="{{this.id}}"
@@ -137,16 +137,16 @@
                                     class="terms0 pt-3-half text-center {{#if this.deleted}}deleted{{/if}}"
                                     contenteditable="true" lang="ar">
                                     <strong>{{this.terms0}}</strong></td>
-                                <td rowspan="2" class="pt-3-half text-center align-middle update">
+                                <td rowspan="2" class="pt-3-half separator text-center align-middle update">
                                 {{#unless this.deleted}}
-                                    <i class="fa fa-save btn-save"></i>
+                                    <a class="fa fa-save btn-update btn-save"></a>
                                     &nbsp;
-                                    <i class="fa fa-trash btn-delete"></i>
+                                    <a class="fa fa-trash btn-update enabled btn-delete"></a>
                                 {{/unless}}
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="def pt-3-half {{#if this.deleted}}deleted{{/if}}" contenteditable="true">
+                                <td colspan="2" class="def separator pt-3-half {{#if this.deleted}}deleted{{/if}}" contenteditable="true">
                                     {{this.def}}</td>
                             </tr>
                             {{/each}}

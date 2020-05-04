@@ -143,5 +143,14 @@ img.demo {
 }
 
 .update .enabled {
-    color: red;
+    color: blue;
+}
+
+.table .separator {
+    border-bottom-color: black;
+}
+.btn-update.enabled:hover,
+.btn-update.enabled:focus {
+    cursor: pointer;
+    color: black !important;
 }
