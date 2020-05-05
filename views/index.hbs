@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {{#if content}}
     <meta name="description" content="{{{trunc content 65}}}...">
+    <title>Levantine Arabic Reader Content ID {{filename}}</title>
     {{else}}
     <meta name="description" content="Word for word reader and dictionary for the Levantine Arabic language dialect">
-    {{/if}}
     <title>Levantine Arabic Reader</title>
+    {{/if}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/assets/styles.css" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XHPNPS9B36"></script>
@@ -46,14 +47,25 @@
     <meta name="og:site_name" content="Levantine Arabic Reader and Dictionary">
     <meta name="og:locale" content="en">
     <meta name="og:image" content="http://levantinereader.com/assets/icon.png">
+    {{#if content}}
+    <meta name="og:url" content="http://levantinereader.com/content/{{filename}}">
+    <meta name="og:title" content="Levantine Arabic Reader Content ID {{filename}}">
+    <meta name="og:description" content="{{{trunc content 65}}}...">
+    {{else}}
     <meta name="og:url" content="http://levantinereader.com">
     <meta name="og:title" content="Levantine Arabic Reader">
     <meta name="og:description" content="Word for word reader and dictionary for the Levantine Arabic dialect">
+    {{/if}}
 
     <meta name="twitter:card" content="summary">
     <meta name="twitter:image" content="http://levantinereader.com/assets/icon.png">
+    {{#if content}}
+    <meta name="twitter:title" content="Levantine Arabic Reader Content ID {{filename}}">
+    <meta name="twitter:description" content="{{{trunc content 65}}}...">
+    {{else}}
     <meta name="twitter:title" content="Levantine Arabic Reader">
     <meta name="twitter:description" content="Word for word reader and dictionary for the Levantine Arabic dialect">
+    {{/if}}
 </head>
 
 <body>
