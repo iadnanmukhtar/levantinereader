@@ -4,12 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{#if content}}
+    <meta name="description" content="{{{trunc content 65}}}...">
+    {{else}}
     <meta name="description" content="Word for word reader and dictionary for the Levantine Arabic language dialect">
+    {{/if}}
     <title>Levantine Arabic Reader</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/assets/styles.css" />
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XHPNPS9B36"></script>
+    <script src="https://use.fontawesome.com/0732e6dddb.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -21,6 +25,7 @@
     </script>
     <script data-ad-client="ca-pub-1199080602686133" async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb0e52dbe2523ad"></script>
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -91,7 +96,7 @@
     <main class="container mt-3 mb-3">
         <div class="row">
             <div class="col">
-                <form method="POST">
+                <form action="/" method="POST">
                     <div class="row">
                         <div class="col">
                             <label for="content">
@@ -111,14 +116,19 @@
         </div>
 
         {{#if content}}
+
         <div class="row mt-3">
             <div class="col mt-3">
                 <h5>Click on the words to get definitions:</h5>
+            </div>
+            <div class="col mt-3 text-right">
+                <div class="addthis_inline_share_toolbox"></div>
             </div>
         </div>
 
         <section class="row mt-1">
             <div class="col text-right def-box" lang="ar">
+
                 {{#each words}}
                 {{#unless this.delim}}
                 <a tabindex="{{@index}}" class="word" title="{{this.word}}"
@@ -275,7 +285,8 @@
                                 <p>
                                     Do you know the new modern veiled girls? Sunglasses, jeans, a Luis Vuitton knock-off
                                     purse, J'adore perfume, and an iPhone with a pink cover, an intellcual with a
-                                    smattering of English, ..., a selfie? That's me...</p>
+                                    smattering of English, ..., a selfie with friends, blah, blah, blah? That's me...
+                                </p>
                                 <p class="mb-1 text-right" lang="ar">
                                     بتعرفوا البنات المحجبات العصريات؟ نظارة شمسية وجينز وشنطة لويس فيتون مقلدة و عطر
                                     چادوغ وايفون مع كڤر زهري ومثقفة و بتلطش انجليزي وجود داي ويز فرندز وسيلفي وبلا بلا
@@ -428,12 +439,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script>
         $(function () {
+
             tippy('[data-tippy-content]', {
                 trigger: 'click focus',
                 interactive: true,
                 placement: 'auto',
                 allowHTML: true
             });
+
         });
     </script>
 </body>

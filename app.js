@@ -4,6 +4,7 @@ const express = require('express');
 const hbs = require('hbs');
 const Matcher = require('./lib/Matcher');
 const Notifier = require('./lib/Notifier');
+const ContentStore = require('./lib/ContentStore');
 const utils = require('./lib/utils');
 
 var app = express();
@@ -16,15 +17,19 @@ app.use('/assets', express.static('assets'));
 app.use('/', express.static('assets'));
 app.listen(3000);
 
-const DELIMS = /([\s\u0020-\u002f\u003a-\u0040\u005b-\u0060\u007b-\u007f\u0600-\u061f\u06d4-\u06de])/g;
+const DELIMS = /([\s\u2000-\u20ff\u0020-\u002f\u003a-\u0040\u005b-\u0060\u007b-\u007f\u0600-\u061f\u06d4-\u06de])/g;
 const ARABIC = /^([\u0600-\u06ff .,\/\\]+)$/g;
 
-app.post('/', function (req, res) {
-    return process(req, res, req.body.content);
+app.get('/', function (req, res) {
+    return processPost(req, res);
 });
 
-app.get('/', function (req, res) {
-    return process(req, res, req.query.content);
+app.post('/', function (req, res) {
+    return processPost(req, res);
+});
+
+app.get('/content/:filename', function (req, res) {
+    return processFile(req, res, req.params.filename);
 });
 
 app.get('/search', function (req, res) {
@@ -49,7 +54,26 @@ app.get('/refresh', function (req, res) {
     return;
 });
 
-function process(req, res, content) {
+function processPost(req, res) {
+    var content = req.body.content;
+    if (content) {
+        var filename = ContentStore.store(content);
+        res.redirect('/content/' + filename);
+    } else
+        res.render('index');
+}
+
+function processFile(req, res, filename) {
+    var content = ContentStore.retrieve(filename);
+    if (content == null) {
+        res.send('Content ID ' + filename + ' is not found').sendStatus(404);
+        return;
+    }
+    var result = processContent(req, res, content, filename);
+    res.render('index', result);
+}
+
+function processContent(req, res, content, filename) {
     var defs = {};
     if (content) {
         content = utils.fixContent(content);
@@ -72,10 +96,11 @@ function process(req, res, content) {
             }
         }
     }
-    res.render('index', {
+    return {
         content: content,
+        filename: filename,
         words: defs
-    });
+    };
 }
 
 function processSearch(req, res, q) {
@@ -194,4 +219,8 @@ hbs.registerHelper('islinefeed', function (value) {
 
 hbs.registerHelper('eq', function (value1, value2) {
     return value1 == value2;
+});
+
+hbs.registerHelper('trunc', function (value, n) {
+    return value.substr(0, n);
 });
