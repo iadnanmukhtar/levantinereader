@@ -264,7 +264,7 @@
                 var terms0 = $('[data-id=' + id + '] .terms0').text();
                 var terms1 = $('[data-id=' + id + '] .terms1').text();
                 var def = $('[data-id=' + id + '] .def').text();
-                jQuery.get('/update', {
+                $.post('/update', {
                     id: id,
                     terms0: terms0,
                     terms1: terms1,
@@ -280,7 +280,7 @@
             var terms1 = $('[data-id=' + id + '] .terms1').text();
             var def = $('[data-id=' + id + '] .def').text();
             if (confirm('Are you sure you want to delete the word: ' + terms0)) {
-                jQuery.get('/delete', {
+                $.post('/delete', {
                     id: id,
                     terms0: terms0,
                     terms1: terms1

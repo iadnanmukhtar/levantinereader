@@ -36,22 +36,22 @@ app.get('/search', function (req, res) {
     return processSearch(req, res, req.query.q);
 });
 
-app.get('/add', function (req, res) {
-    return processAdd(req, res);
-});
-
-app.get('/update', function (req, res) {
-    return processUpdate(req, res);
-});
-
-app.get('/delete', function (req, res) {
-    return processDelete(req, res);
-});
-
 app.get('/refresh', function (req, res) {
     processRefresh(req, res);
     res.sendStatus(200);
     return;
+});
+
+app.post('/add', function (req, res) {
+    return processAdd(req, res);
+});
+
+app.post('/update', function (req, res) {
+    return processUpdate(req, res);
+});
+
+app.post('/delete', function (req, res) {
+    return processDelete(req, res);
 });
 
 function processPost(req, res) {
@@ -121,11 +121,11 @@ function processSearch(req, res, q) {
 
 async function processAdd(req, res) {
     var errors = new Array();
-    var pos = req.query.pos;
-    var word = req.query.word;
-    var past = req.query.past;
-    var pres = req.query.pres;
-    var def = req.query.def;
+    var pos = req.body.pos;
+    var word = req.body.word;
+    var past = req.body.past;
+    var pres = req.body.pres;
+    var def = req.body.def;
     if (!pos || pos.trim() == '')
         errors.push("Part of Speech cannot be blank");
     if (pos && !pos.match(/^(stop|verb|word)$/))
@@ -183,10 +183,10 @@ async function processAdd(req, res) {
 }
 
 function processUpdate(req, res) {
-    var id = req.query.id;
-    var terms0 = req.query.terms0.trim();
-    var terms1 = req.query.terms1.trim();
-    var def = req.query.def.trim();
+    var id = req.body.id;
+    var terms0 = req.body.terms0.trim();
+    var terms1 = req.body.terms1.trim();
+    var def = req.body.def.trim();
     try {
         Matcher.updateWord(id, terms0, terms1, def);
         res.status(200).send('ID ' + id + ' updated');
@@ -197,9 +197,9 @@ function processUpdate(req, res) {
 }
 
 function processDelete(req, res) {
-    var id = req.query.id;
-    var terms0 = req.query.terms0.trim();
-    var terms1 = req.query.terms1.trim();
+    var id = req.body.id;
+    var terms0 = req.body.terms0.trim();
+    var terms1 = req.body.terms1.trim();
     try {
         Matcher.deleteWord(id, terms0, terms1);
         res.status(200).send('ID ' + id + ' deleted');
