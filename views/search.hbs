@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Dictionary for the Levantine Arabic language dialect">
     <title>Levantine Arabic Dictionary</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/lib/bootstrap-4.4.1.min.css" />
+    <script src="/assets/lib/fontawesome.js"></script>
     <link rel="stylesheet" href="/assets/styles.css" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XHPNPS9B36"></script>
     <script>
@@ -18,7 +19,6 @@
         gtag('js', new Date());
         gtag('config', 'G-XHPNPS9B36');
     </script>
-    <script src="https://use.fontawesome.com/0732e6dddb.js"></script>
     <script data-ad-client="ca-pub-1199080602686133" async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script type="application/ld+json">
@@ -72,8 +72,8 @@
                     <a class="nav-link" href="/search">Dictionary</span></a>
                 </li>
             </ul>
-            <form action="/search" class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" name="q">
+            <form action="/search" class="form-inline my-2 my-lg-0 search">
+                <input class="form-control mr-sm-2" lang="ar" type="text" placeholder="Search" name="q">
                 <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
@@ -100,8 +100,8 @@
                 {{/if}}
 
                 <form action="/search">
-                    <section class="input-group mb-3">
-                        <input autofocus lang="ar" type="text" class="form-control" placeholder="ابحث بالعربي أو English" name="q"
+                    <section class="input-group mb-3 search">
+                        <input autofocus lang="ar" type="text" class="form-control" placeholder="Search in Arabic or English..." name="q"
                             value="{{q}}">
                         <div class="input-group-append">
                             <button class="btn btn-warning" type="submit">Search</button>
@@ -114,9 +114,9 @@
                 {{#if results}}
                 <p class="mt-2">Found {{results.length}} results:</p>
 
-                <section id="table" class="mt-3 table-editable">
-                    <table class="table table-bordered table-hover table-responsive-md">
-                        <thead class="thead-dark">
+                <section id="table" class="mt-3">
+                    <table class="table table-bordered table-hover">
+                        <thead class="">
                             <tr class="table-primary">
                                 <th class="text-center">Type</th>
                                 <th colspan="2" class="text-center">Word</th>
@@ -129,15 +129,15 @@
                                 <td rowspan="2" title="{{this.id}}" class="pt-3-half separator text-center align-middle">
                                     {{this.pos}}
                                 </td>
-                                <td title="{{this.id}}"
+                                <td title="{{this.id}}" width="35%"
                                     class="terms1 pt-3-half text-center {{#if this.deleted}}deleted{{/if}}"
                                     {{#if (eq this.pos 'verb')}}contenteditable="true"{{/if}} lang="ar">
                                     <strong>{{this.terms1}}</strong></td>
-                                <td title="{{this.id}}"
+                                <td title="{{this.id}}" width="35%"
                                     class="terms0 pt-3-half text-center {{#if this.deleted}}deleted{{/if}}"
                                     contenteditable="true" lang="ar">
                                     <strong>{{this.terms0}}</strong></td>
-                                <td rowspan="2" class="pt-3-half separator text-center align-middle update">
+                                <td rowspan="2" class="pt-3-half separator text-center align-middle update text-nowrap">
                                 {{#unless this.deleted}}
                                     <a class="fa fa-save btn-update btn-save"></a>
                                     &nbsp;
@@ -185,7 +185,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="/add">
+                    <form method="POST" action="/add">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="pos">Part of Speech</label>
@@ -242,10 +242,9 @@
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="/assets/editable-table.js"></script>
+    <script src="/assets/lib/jquery-3.5.1.min.js"></script>
+    <script src="/assets/lib/bootstrap-4.4.1.min.js"></script>
+    <script src="/assets/lib/jquery.webui-popover-1.2.0.min.js"></script>
     <script>
         $('#pos-word').click(function () {
             $('#tensesGroup').addClass('d-none');
