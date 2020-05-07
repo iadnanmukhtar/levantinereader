@@ -36,6 +36,10 @@ app.get('/search', function (req, res) {
     return processSearch(req, res, req.query.q);
 });
 
+app.get('/dups', function (req, res) {
+    return processDuplicates(req, res, req.query.q);
+});
+
 app.get('/refresh', function (req, res) {
     processRefresh(req, res);
     res.sendStatus(200);
@@ -106,7 +110,7 @@ function processContent(req, res, content, filename) {
 function processSearch(req, res, q) {
     var results = new Array();
     if (q && q != "" && !q.match(/^\s$/) && q.length > 1) {
-        var _q = utils.normalizeArabic(utils.stripArabicDiacritics(q.toLowerCase()));
+        var _q = utils.normalizeArabic(utils.stripBasicArabicDiacritics(q.toLowerCase()));
         for (var i = 0; i < Matcher.DICTS.length; i++) {
             var subresults = Matcher.DICTS[i].search(_q);
             for (var j = 0; j < subresults.length; j++)
@@ -115,6 +119,18 @@ function processSearch(req, res, q) {
     }
     res.render('search.hbs', {
         q: q,
+        results: results
+    });
+}
+
+function processDuplicates(req, res) {
+    var results = new Array();
+    for (var i = 0; i < Matcher.DICTS.length; i++) {
+        var subresults = Matcher.DICTS[i].getDuplicates();
+        for (var j = 0; j < subresults.length; j++)
+            utils.pushUniqueObject(results, "id", subresults[j].id, subresults[j]);
+    }
+    res.render('dups.hbs', {
         results: results
     });
 }

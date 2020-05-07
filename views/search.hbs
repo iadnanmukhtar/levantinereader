@@ -271,6 +271,8 @@
                     def: def
                 }, function (data) {
                     $('[data-id=' + id + '] .btn-save').removeClass('enabled');
+                }).fail(function () {
+                    alert('Error updating item');
                 });
             }
         });
@@ -285,7 +287,10 @@
                     terms0: terms0,
                     terms1: terms1
                 }, function (data) {
+                    $('[data-id=' + id + '] .btn-delete').removeClass('enabled');
                     location.reload();
+                }).fail(function () {
+                    alert('Error deleting item');
                 });
             }
         });
