@@ -84,6 +84,19 @@ textarea {
     background-color: lemonchiffon;
 }
 
+.webui-popover-inner {
+    max-height: 200px;
+    max-width: 300px;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+.webui-popover-inner [lang=ar] {
+    font-size: 18px;
+}
+
+
 .table-editable {
     background-color: white;
 }
