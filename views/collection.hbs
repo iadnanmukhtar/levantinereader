@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{collection.title}}, Levantine Arabic Dialect Collection</title>
+    <meta name="description" content="{{collection.about}}">
+    <link rel="stylesheet" href="/assets/lib/bootstrap-4.4.1.min.css" />
+    <link rel="stylesheet" href="/assets/lib/jquery.webui-popover-1.2.0.min.css">
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <script src="/assets/lib/fontawesome.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XHPNPS9B36"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-XHPNPS9B36');
+    </script>
+    <script data-ad-client="ca-pub-1199080602686133" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb0e52dbe2523ad"></script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "url": "https://levantinereader.com",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://levantinereader.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        }
+    </script>
+
+    <link rel="image_src" href="/assets/icon.png" />
+    <link rel="apple-touch-icon" href="/assets/icon.png" />
+    <link rel="icon" href="/assets/icon.png" />
+
+    <meta name="og:site_name" content="Levantine Arabic Reader and Dictionary">
+    <meta name="og:locale" content="en">
+    <meta name="og:image" content="https://levantinereader.com/assets/icon.png">
+    <meta name="og:url" content="https://levantinereader.com">
+    <meta name="og:title" content="{{collection.title}}, Levantine Arabic Dialect Collection">
+    <meta name="og:description" content="{{collection.about}}">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="/assets/icon.png">
+    <meta name="twitter:title" content="{{collection.title}}, Levantine Arabic Dialect Collection">
+    <meta name="twitter:description" content="{{collection.about}}">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <a class="navbar-brand" href="/">
+            <img src="/assets/icon.png" width="30" height="30" class="d-inline-block align-top" alt="Flag of Jordan">
+            Levantine Reader
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/search">Dictionary</span></a>
+                </li>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown">Collections</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/collection/DeekBlog">Deek Blog (كتابات ديك الجن)</a>
+                    </div>
+                </li>
+            </ul>
+            <form title="Levantine Dictionary" action="/search" class="form-inline my-2 my-lg-0 search">
+                <input class="form-control mr-sm-2" lang="ar" type="text" placeholder="Search" name="q">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <main class="container mt-3 mb-3">
+
+        <h1 class="h1-r">{{collection.title}}</h1>
+
+        <p>{{collection.about}}</p>
+
+        <div class="list-group" lang="ar">
+
+            {{#each collection.article}}
+            <div class="list-group-item list-group-item-action">
+                <article class="media p-3 row">
+                    <img class="mt-1 col-12 col-md-2" src="{{this.image}}" alt="{{../collection.name}}, {{this.name}}">
+                    <div class="media-body">
+                        <div class="row">
+                            <div class="col-12 col-md-8 title text-right">
+                                <h3 lang="ar" class="mb-1">
+                                    <strong><a href="/collection/{{../collection.name}}/{{this.name}}">{{this.name}}</a></strong>
+                                </h3>
+                            </div>
+                        </div>
+                        <p class="mb-1 text-right" lang="ar">
+                            <div class="about text-right"><a href="/collection/{{../collection.name}}/{{this.name}}">{{this.about}}...</a></div>
+                            <div class="source text-right"><small><a target="samples" href="{{this.url}}">مصدر</a></small></div>
+                        </p>
+                    </div>
+                </article>
+            </div>
+            {{/each}}
+
+        </div>
+
+    </main>
+
+    <footer class="footer mt-auto py-3">
+        <div class="container text-center">
+            <span class="text-muted">Questions? Contact me at jarfile@gmail.com</span>
+        </div>
+    </footer>
+
+    <script src="/assets/lib/jquery-3.5.1.min.js"></script>
+    <script src="/assets/lib/bootstrap-4.4.1.min.js"></script>
+    <script src="/assets/lib/jquery.webui-popover-1.2.0.min.js"></script>
+</body>
+
+</html>

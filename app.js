@@ -2,6 +2,7 @@
 const bodyParser = require("body-parser");
 const express = require('express');
 const hbs = require('hbs');
+const fs = require('fs');
 const Matcher = require('./lib/Matcher');
 const Notifier = require('./lib/Notifier');
 const ContentStore = require('./lib/ContentStore');
@@ -26,6 +27,14 @@ app.get('/', function (req, res) {
 
 app.post('/', function (req, res) {
     return processPost(req, res);
+});
+
+app.get('/collection/:collectionname', function (req, res) {
+    return processCollection(req, res, req.params.collectionname);
+});
+
+app.get('/collection/:collectionname/:articlename', function (req, res) {
+    return processArticle(req, res, req.params.collectionname, req.params.articlename);
 });
 
 app.get('/content/:filename', function (req, res) {
@@ -67,17 +76,40 @@ function processPost(req, res) {
         res.render('index');
 }
 
-function processFile(req, res, filename) {
-    var content = ContentStore.retrieve(filename);
-    if (content == null) {
-        res.send('Content ID ' + filename + ' is not found').sendStatus(404);
+function processCollection(req, res, collectionname) {
+    var collection = ContentStore.retrieveCollection(collectionname);
+    if (collection == null) {
+        res.status(404).send('Collection \"' + collectionname + '\" is not found');
         return;
     }
-    var result = processContent(req, res, content, filename);
+    res.render('collection', {
+        collection: collection
+    });
+}
+
+function processArticle(req, res, collectionname, articlename) {
+    var content = ContentStore.retrieveArticle(collectionname, articlename);
+    if (content == null) {
+        res.status(404).send('Article \"' + collectionname + ' : ' + articlename + '\" is not found');
+        return;
+    }
+    var url = '/collections/' + articlename;
+    var result = processContent(req, res, content, collectionname + ', ' + articlename, url);
     res.render('index', result);
 }
 
-function processContent(req, res, content, filename) {
+function processFile(req, res, filename) {
+    var content = ContentStore.retrieve(filename);
+    if (content == null) {
+        res.status(404).send('Content ID ' + filename + ' is not found');
+        return;
+    }
+    var url = '/content/' + filename;
+    var result = processContent(req, res, content, '[' + filename + ']', url);
+    res.render('index', result);
+}
+
+function processContent(req, res, content, title, url) {
     var defs = {};
     if (content) {
         content = utils.fixContent(content);
@@ -102,7 +134,8 @@ function processContent(req, res, content, filename) {
     }
     return {
         content: content,
-        filename: filename,
+        title: title,
+        url: encodeURI(url),
         words: defs
     };
 }
@@ -130,7 +163,7 @@ function processDuplicates(req, res) {
         for (var j = 0; j < subresults.length; j++)
             utils.pushUniqueObject(results, "id", subresults[j].id, subresults[j]);
     }
-    res.render('dups.hbs', {
+    res.render('dups', {
         results: results
     });
 }
@@ -187,11 +220,11 @@ async function processAdd(req, res) {
     }
 
     if (errors.length > 0) {
-        res.render('search.hbs', {
+        res.render('search', {
             errors: errors
         });
     } else {
-        res.render('search.hbs', {
+        res.render('search', {
             q: def,
             success: 'New word successfully added'
         });
@@ -238,5 +271,5 @@ hbs.registerHelper('eq', function (value1, value2) {
 });
 
 hbs.registerHelper('trunc', function (value, n) {
-    return value.substr(0, n);
+    return value.substr(0, n).replace('\r\n', ' ');
 });

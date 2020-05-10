@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {{#if content}}
     <meta name="description" content="{{{trunc content 65}}}...">
-    <title>Levantine Arabic Reader Content ID {{filename}}</title>
+    <title>Levantine Arabic Reader Content, {{title}}</title>
     {{else}}
     <meta name="description" content="Word for word reader and dictionary for the Levantine Arabic language dialect">
     <title>Levantine Arabic Reader</title>
@@ -32,36 +32,36 @@
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "url": "http://levantinereader.com",
+            "url": "https://levantinereader.com",
             "potentialAction": {
                 "@type": "SearchAction",
-                "target": "http://levantinereader.com/search?q={search_term_string}",
+                "target": "https://levantinereader.com/search?q={search_term_string}",
                 "query-input": "required name=search_term_string"
             }
         }
     </script>
 
-    <link rel="image_src" href="http://levantinereader.com/assets/icon.png" />
-    <link rel="apple-touch-icon" href="http://levantinereader.com/assets/icon.png" />
-    <link rel="icon" href="http://levantinereader.com/assets/icon.png" />
+    <link rel="image_src" href="/assets/icon.png" />
+    <link rel="apple-touch-icon" href="/assets/icon.png" />
+    <link rel="icon" href="/assets/icon.png" />
 
     <meta name="og:site_name" content="Levantine Arabic Reader and Dictionary">
     <meta name="og:locale" content="en">
-    <meta name="og:image" content="http://levantinereader.com/assets/icon.png">
+    <meta name="og:image" content="https://levantinereader.com/assets/icon.png">
     {{#if content}}
-    <meta name="og:url" content="http://levantinereader.com/content/{{filename}}">
-    <meta name="og:title" content="Levantine Arabic Reader Content ID {{filename}}">
+    <meta name="og:url" content="https://levantinereader.com{{url}}">
+    <meta name="og:title" content="Levantine Arabic Reader, {{title}}">
     <meta name="og:description" content="{{{trunc content 65}}}...">
     {{else}}
-    <meta name="og:url" content="http://levantinereader.com">
+    <meta name="og:url" content="https://levantinereader.com">
     <meta name="og:title" content="Levantine Arabic Reader">
     <meta name="og:description" content="Word for word reader and dictionary for the Levantine Arabic dialect">
     {{/if}}
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:image" content="http://levantinereader.com/assets/icon.png">
+    <meta name="twitter:image" content="/assets/icon.png">
     {{#if content}}
-    <meta name="twitter:title" content="Levantine Arabic Reader Content ID {{filename}}">
+    <meta name="twitter:title" content="Levantine Arabic Reader, {{title}}">
     <meta name="twitter:description" content="{{{trunc content 65}}}...">
     {{else}}
     <meta name="twitter:title" content="Levantine Arabic Reader">
@@ -89,6 +89,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/search">Dictionary</span></a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown">Collections</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/collection/DeekBlog">Deek Blog (كتابات ديك الجن)</a>
+                    </div>
+                </li>
             </ul>
             <form title="Levantine Dictionary" action="/search" class="form-inline my-2 my-lg-0 search">
                 <input class="form-control mr-sm-2" lang="ar" type="text" placeholder="Search" name="q">
@@ -115,13 +121,13 @@
                             <label for="content">
                                 <h5 class="display-5">Type-in any Levantine Arabic text:</h5>
                             </label>
-                            <textarea class="form-control" lang="ar" name="content" rows="3"
+                            <textarea class="source form-control" lang="ar" name="content" rows="3"
                                 placeholder="أكتب أي مقالة باللهجة الشامية العامية">{{#unless content}}هاي جملة بسيطة{{else}}{{content}}{{/unless}}</textarea>
                         </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-6 offset-3">
-                            <button class="form-control btn btn-warning" value="submit">Help me read</button>
+                            <button class="btn-read form-control btn btn-warning" value="submit">Help me read</button>
                         </div>
                     </div>
                 </form>
@@ -227,6 +233,35 @@
                             </div>
                         </article>
                     </a>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="row mt-5">
+
+            <div class="col">
+
+                <h3 class="mb-3"><strong>Levantine Content</strong></h3>
+
+                <div class="list-group">
+                    <a href="/collection/DeekBlog"
+                        class="list-group-item list-group-item-action">
+                        <article class="media p-3 row">
+                            <img class="mt-1 col-12 col-md-2" src="/assets/res/deek_blog.jpeg" alt="Deek Blog">
+                            <div class="media-body">
+                                <div class="row">
+                                    <div class="col-12 col-md-8 title">
+                                        <h5 class="mb-1"><strong>Deek Blog (كتابات ديك الجن)</strong></h5>
+                                    </div>
+                                    <div class="col-12 col-md-4 source"><small>Source: Deek Blog</small></div>
+                                </div>
+                                <p>
+                                    Various writings from a famous anonymous Jordanian blogger and writer, Deek al-Jen, in the Levantine dialect.
+                                </p>
+                            </div>
+                        </article>
+                    </a>
                     <a target="samples" href="https://www.youtube.com/playlist?list=PLsRcJmc7xsAW-872drN6qo9tKm-wtijn2"
                         class="list-group-item list-group-item-action">
                         <article class="media p-3 row">
@@ -242,92 +277,24 @@
                                 <p>
                                     Abu Sanad’s Family (عيلة أبو سند) is an animated YouTube series by Our Family Life
                                     that’s has both Levantine/Jordanian Arabic captains/subtitles. I know this will help
-                                    me
-                                    tremendously and I hope it helps you too.
+                                    me tremendously and I hope it helps you too.
                                 </p>
                             </div>
                         </article>
                     </a>
-                    <a target="samples" href="https://langmedia.fivecolleges.edu/culturetalk/Arab-Levant"
+                    <a target="samples" href="https://playaling.com"
                         class="list-group-item list-group-item-action">
                         <article class="media p-3 row">
-                            <img class="mt-1 col-12 col-md-2" src="/assets/res/langmedia.png" alt="LangMedia">
+                            <img class="mt-1 col-12 col-md-2" src="/assets/res/playaling.png" alt="Playaling.com">
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-12 col-md-8 title">
-                                        <h5 class="mb-1"><strong>CultureTalk Arab Levant: Video Pages by Topic</strong>
-                                        </h5>
+                                        <h5 class="mb-1"><strong>Playaling</strong></h5>
                                     </div>
-                                    <div class="col-12 col-md-4 source"><small>Source: LangMedia CultureTalk</small>
-                                    </div>
+                                    <div class="col-12 col-md-4 source"><small>Source: Playaling</small></div>
                                 </div>
                                 <p>
-                                    CultureTalk features video clips of interviews and discussions with people from many
-                                    different countries and of many different ages and walks of life. Some interviews
-                                    and
-                                    discussions are in English; more are in languages other than English. Translations
-                                    and/or
-                                    transcripts are given for all non-English video clips.
-                                </p>
-                            </div>
-                        </article>
-                    </a>
-                </div>
-            </div>
-
-        </section>
-
-        <section class="row mt-5">
-
-            <div class="col">
-
-                <h3 class="mb-3"><strong>Levantine Content</strong></h3>
-
-                <div class="list-group">
-                    <a target="samples" href="https://www.facebook.com/DeekBlog/posts/337787486346048"
-                        class="list-group-item list-group-item-action">
-                        <article class="media p-3 row">
-                            <img class="mt-1 col-12 col-md-2" src="/assets/res/deek_blog.jpeg" alt="Deek Blog">
-                            <div class="media-body">
-                                <div class="row">
-                                    <div class="col-12 col-md-8 title">
-                                        <h5 class="mb-1"><strong>A Plate of Kanafa</strong></h5>
-                                    </div>
-                                    <div class="col-12 col-md-4 source"><small>Deek Blog</small></div>
-                                </div>
-                                <p>
-                                    Do you know the new modern veiled girls? Sunglasses, jeans, a Luis Vuitton knock-off
-                                    purse, J'adore perfume, and an iPhone with a pink cover, an intellcual with a
-                                    smattering of English, ..., a selfie with friends, blah, blah, blah? That's me...
-                                </p>
-                                <p class="mb-1 text-right" lang="ar">
-                                    بتعرفوا البنات المحجبات العصريات؟ نظارة شمسية وجينز وشنطة لويس فيتون مقلدة و عطر
-                                    چادوغ وايفون مع كڤر زهري ومثقفة و بتلطش انجليزي وجود داي ويز فرندز وسيلفي وبلا بلا
-                                    بلا بلا؟ هاي أنا...
-                                </p>
-                            </div>
-                        </article>
-                    </a>
-                    <a target="samples" href="https://www.facebook.com/DeekBlog/posts/347423415382455"
-                        class="list-group-item list-group-item-action">
-                        <article class="media p-3 row">
-                            <img class="mt-1 col-12 col-md-2" src="/assets/res/deek_blog.jpeg" alt="Deek Blog">
-                            <div class="media-body">
-                                <div class="row">
-                                    <div class="col-12 col-md-8 title">
-                                        <h5 class="mb-1"><strong>White Twix</strong></h5>
-                                    </div>
-                                    <div class="col-12 col-md-4 source"><small>Deek Blog</small></div>
-                                </div>
-                                <p>
-                                    Have you ever stood on your balcony and glanced at Amman? You'll see windows with
-                                    lights turned off and some with dimmed lights. Behind each window there is a girl
-                                    with her head on the pillow and asking her Lord for speacial things in her life and
-                                    about her beauty...</p>
-                                <p class="mb-1 text-right" lang="ar">
-                                    لو عمرك وقفت على بلكونتك بالليل، وألقيت نظرة على عمّان، راح تشوف شبابيك كثير ضوها
-                                    مطفي، ومنها ضوّه خافت.. ورا كل شباك فيهم، في بنت حاطّة راسها عالمخدة.. و بتطلب من
-                                    ربّنا شي خاصّ بجمالها او بحياتها...
+                                    Online resource for learning Arabic through engaging real-world content and interactive captioning. With new clips and features being added all the time, we’re a dedicated team of language professionals making engaging real-world Arabic content available to teachers and students across the globe.
                                 </p>
                             </div>
                         </article>
@@ -342,7 +309,7 @@
                                     <div class="col-12 col-md-8 title">
                                         <h5 class="mb-1"><strong>Around Dubai</strong></h5>
                                     </div>
-                                    <div class="col-12 col-md-4 source"><small>Lingualism</small></div>
+                                    <div class="col-12 col-md-4 source"><small>Source: Lingualism</small></div>
                                 </div>
                                 <p>
                                     Dubai is a beautiful city. A lot of my friends who live in America ask me about life
@@ -369,7 +336,7 @@
                                     <div class="col-12 col-md-8 title">
                                         <h5 class="mb-1"><strong>A Vulnerable Patient</strong></h5>
                                     </div>
-                                    <div class="col-12 col-md-4 source"><small>Lingualism</small></div>
+                                    <div class="col-12 col-md-4 source"><small>Source: Lingualism</small></div>
                                 </div>
                                 <p>
                                     You won’t believe what happened when dad was at the hospital. We were in a room with
@@ -394,7 +361,7 @@
                                     <div class="col-12 col-md-8 title">
                                         <h5 class="mb-1"><strong>My Birthday in Berlin</strong></h5>
                                     </div>
-                                    <div class="col-12 col-md-4 source"><small>Lingualism</small></div>
+                                    <div class="col-12 col-md-4 source"><small>Source: Lingualism</small></div>
                                 </div>
                                 <p>
                                     Last week was my birthday. Therefore, my girlfriend and I decided to go to Berlin.
@@ -406,6 +373,30 @@
                                     الأسبوع الماضي كان عيد ميلادي. و منشان هيك قررت انا و رفيقتي نروح ع برلين. منو سياحة
                                     كونوالصيف رح يخلص. ومنو منحتفل بعيد ميلادي هنيك. بالرغم اني انا مو كتير بحب شغلات
                                     أعيادالميلاد...
+                                </p>
+                            </div>
+                        </article>
+                    </a>
+                    <a target="samples" href="https://langmedia.fivecolleges.edu/culturetalk/Arab-Levant"
+                        class="list-group-item list-group-item-action">
+                        <article class="media p-3 row">
+                            <img class="mt-1 col-12 col-md-2" src="/assets/res/langmedia.png" alt="LangMedia">
+                            <div class="media-body">
+                                <div class="row">
+                                    <div class="col-12 col-md-8 title">
+                                        <h5 class="mb-1"><strong>CultureTalk Arab Levant: Video Pages by Topic</strong>
+                                        </h5>
+                                    </div>
+                                    <div class="col-12 col-md-4 source"><small>Source: LangMedia CultureTalk</small>
+                                    </div>
+                                </div>
+                                <p>
+                                    CultureTalk features video clips of interviews and discussions with people from many
+                                    different countries and of many different ages and walks of life. Some interviews
+                                    and
+                                    discussions are in English; more are in languages other than English. Translations
+                                    and/or
+                                    transcripts are given for all non-English video clips.
                                 </p>
                             </div>
                         </article>
@@ -454,6 +445,19 @@
             $('[data-content]').webuiPopover({
                 style: 'inverse'
             });
+
+            {{#if content}}
+                $('.source').attr('rows', '1');
+                $('.btn-read').removeClass('btn-warning').addClass('btn-outline-dark');
+                $('.source').focusout(function() {
+                    $(this).attr('rows', '1');
+                    $('.btn-read').removeClass('btn-warning').addClass('btn-outline-dark');
+                });
+                $('.source').focus(function() {
+                    $(this).attr('rows', '3');
+                    $('.btn-read').removeClass('btn-outline-dark').addClass('btn-warning');
+                });
+            {{/if}}
         });
     </script>
 </body>
