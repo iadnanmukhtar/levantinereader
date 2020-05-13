@@ -45,6 +45,12 @@
     <link rel="apple-touch-icon" href="/assets/icon.png" />
     <link rel="icon" href="/assets/icon.png" />
 
+    {{#if content}}
+    <link rel="canonical" href="https://levantinereader.com{{url}}" />
+    {{else}}
+    <link rel="canonical" href="https://levantinereader.com" />
+    {{/if}}
+
     <meta name="og:site_name" content="Levantine Arabic Reader and Dictionary">
     <meta name="og:locale" content="en">
     <meta name="og:image" content="https://levantinereader.com/assets/icon.png">

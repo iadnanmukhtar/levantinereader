@@ -93,7 +93,7 @@ function processArticle(req, res, collectionname, articlename) {
         res.status(404).send('Article \"' + collectionname + ' : ' + articlename + '\" is not found');
         return;
     }
-    var url = '/collections/' + articlename;
+    var url = '/collection/' + collectionname + '/' + articlename;
     var result = processContent(req, res, content, collectionname + ', ' + articlename, url);
     res.render('index', result);
 }
