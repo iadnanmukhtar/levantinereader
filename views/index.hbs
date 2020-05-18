@@ -90,10 +90,10 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</span></a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/search">Dictionary</span></a>
+                    <a class="nav-link" href="/search">Dictionary</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown">Collections</a>
@@ -153,11 +153,10 @@
 
         <section class="row mt-1">
             <div class="col text-right def-box" lang="ar">
-
                 {{#each words}}
                 {{#unless this.delim}}
                 <a tabindex="{{@index}}" class="word"
-                    data-content="{{#each stems}}<div class={{#unless this.exact}}isnotexact{{/unless}}><span lang=ar>{{this.term}}</span> <span lang=en>({{this.posDesc}})</span><p class={{#unless this.exact}}isnotexact{{/unless}}>{{#if this.exact}}<span lang=en>{{this.def}}</span>{{else}}{{this.def}}{{/if}}</p></div>{{/each}}">
+                    data-content="{{#each stems}}<p><div{{#unless this.exact}} class=isnotexact{{/unless}}><span lang=ar>{{this.term}}</span> <span lang=en>({{this.posDesc}})</span></div><div lang=ar{{#unless this.exact}} class=isnotexact{{/unless}}>{{#if this.prefix}}{{this.prefix}} + {{/if}}{{this.stem}}{{#if this.suffix}} + {{this.suffix}}{{/if}}</div><div lang=en{{#unless this.exact}} class=isnotexact{{/unless}}>{{this.def}}</div></p>{{/each}}">
                     {{#if this.match}}
                     {{#if this.exact}}
                     <strong>{{this.word}}</strong>
@@ -251,8 +250,7 @@
                 <h3 class="mb-3"><strong>Levantine Content</strong></h3>
 
                 <div class="list-group">
-                    <a href="/collection/DeekBlog"
-                        class="list-group-item list-group-item-action">
+                    <a href="/collection/DeekBlog" class="list-group-item list-group-item-action">
                         <article class="media p-3 row">
                             <img class="mt-1 col-12 col-md-2" src="/assets/res/deek_blog.jpeg" alt="Deek Blog">
                             <div class="media-body">
@@ -263,7 +261,8 @@
                                     <div class="col-12 col-md-4 source"><small>Source: Deek Blog</small></div>
                                 </div>
                                 <p>
-                                    Various writings from a famous anonymous Jordanian blogger and writer, Deek al-Jen, in the Levantine dialect.
+                                    Various writings from a famous anonymous Jordanian blogger and writer, Deek al-Jen,
+                                    in the Levantine dialect.
                                 </p>
                             </div>
                         </article>
@@ -288,8 +287,7 @@
                             </div>
                         </article>
                     </a>
-                    <a target="samples" href="https://playaling.com"
-                        class="list-group-item list-group-item-action">
+                    <a target="samples" href="https://playaling.com" class="list-group-item list-group-item-action">
                         <article class="media p-3 row">
                             <img class="mt-1 col-12 col-md-2" src="/assets/res/playaling.png" alt="Playaling.com">
                             <div class="media-body">
@@ -300,7 +298,10 @@
                                     <div class="col-12 col-md-4 source"><small>Source: Playaling</small></div>
                                 </div>
                                 <p>
-                                    Online resource for learning Arabic through engaging real-world content and interactive captioning. With new clips and features being added all the time, we’re a dedicated team of language professionals making engaging real-world Arabic content available to teachers and students across the globe.
+                                    Online resource for learning Arabic through engaging real-world content and
+                                    interactive captioning. With new clips and features being added all the time, we’re
+                                    a dedicated team of language professionals making engaging real-world Arabic content
+                                    available to teachers and students across the globe.
                                 </p>
                             </div>
                         </article>
@@ -455,16 +456,16 @@
             });
 
             {{#if content}}
-                $('.source').attr('rows', '1');
+            $('.source').attr('rows', '1');
+            $('.btn-read').removeClass('btn-warning').addClass('btn-outline-dark');
+            $('.source').focusout(function () {
+                $(this).attr('rows', '1');
                 $('.btn-read').removeClass('btn-warning').addClass('btn-outline-dark');
-                $('.source').focusout(function() {
-                    $(this).attr('rows', '1');
-                    $('.btn-read').removeClass('btn-warning').addClass('btn-outline-dark');
-                });
-                $('.source').focus(function() {
-                    $(this).attr('rows', '3');
-                    $('.btn-read').removeClass('btn-outline-dark').addClass('btn-warning');
-                });
+            });
+            $('.source').focus(function () {
+                $(this).attr('rows', '3');
+                $('.btn-read').removeClass('btn-outline-dark').addClass('btn-warning');
+            }); 
             {{/if}}
         });
     </script>
