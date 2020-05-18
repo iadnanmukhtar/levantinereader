@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -449,7 +449,9 @@
     <script>
         $(function () {
             $('[data-content]').webuiPopover({
-                style: 'inverse'
+                style: 'inverse',
+                placement: 'bottom',
+                animation: 'pop'
             });
 
             {{#if content}}

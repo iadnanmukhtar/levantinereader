@@ -18,7 +18,7 @@ app.use('/assets', express.static('assets'));
 app.use('/', express.static('assets'));
 app.listen(3000);
 
-const DELIMS = /([\s\u2000-\u20ff\u0020-\u002f\u003a-\u0040\u005b-\u0060\u007b-\u007f\u0600-\u061f\u06d4-\u06de])/g;
+const DELIMS = /([\s0-9٠-٩\u2000-\u20ff\u0020-\u002f\u003a-\u0040\u005b-\u0060\u007b-\u007f\u0600-\u061f\u06d4-\u06de\u00a0-\u00bf])/g;
 const ARABIC = /^([\u0600-\u06ff .,\/\\]+)$/g;
 
 app.get('/', function (req, res) {
@@ -115,19 +115,41 @@ function processContent(req, res, content, title, url) {
         content = utils.fixContent(content);
         defs = new Array();
         var tokens = content.split(DELIMS);
+        var delimsBuffer = '';
         for (var i = 0; i < tokens.length; i++) {
             var token = tokens[i];
             if (token !== "") {
                 if (!token.match(DELIMS)) {
+                    if (delimsBuffer.length > 0) {
+                        defs.push({
+                            word: delimsBuffer,
+                            match: true,
+                            exactMatch: true,
+                            delim: true
+                        });
+                    }
+                    delimsBuffer = '';
                     var def = Matcher.match(token);
                     defs.push(def);
                 } else {
-                    defs.push({
-                        word: token,
-                        match: true,
-                        exactMatch: true,
-                        delim: true
-                    });
+                    if (token == '\n') {
+                        if (delimsBuffer.length > 0) {
+                            defs.push({
+                                word: delimsBuffer,
+                                match: true,
+                                exactMatch: true,
+                                delim: true
+                            });
+                        }
+                        defs.push({
+                            word: token,
+                            match: true,
+                            exactMatch: true,
+                            delim: true
+                        });
+                    delimsBuffer = '';
+                    }
+                    delimsBuffer += token;
                 }
             }
         }
