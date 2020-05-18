@@ -4,7 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{#if q}}
+    <meta name="description" content="Levantine dictionary results for {{q}}">
+    {{else}}
     <meta name="description" content="Dictionary for the Levantine Arabic language dialect">
+    {{/if}}
     <title>Levantine Arabic Dictionary</title>
     <link rel="stylesheet" href="/assets/lib/bootstrap-4.4.1.min.css" />
     <script src="/assets/lib/fontawesome.js"></script>
@@ -38,12 +42,16 @@
     <link rel="apple-touch-icon" href="/assets/icon.png" />
     <link rel="icon" href="/assets/icon.png" />
 
-    <link rel="canonical" href="https://levantinereader.com/search" />
+    {{#if q}}
+    <link rel="canonical" href="https://levantinereader.com/search?q={{q}}" />
+    {{else}}
+    <link rel="canonical" href="https://levantinereader.com/dictionary" />
+    {{/if}}
 
     <meta name="og:site_name" content="Levantine Arabic Reader and Dictionary">
     <meta name="og:locale" content="en">
     <meta name="og:image" content="https://levantinereader.com/assets/icon.png">
-    <meta name="og:url" content="https://levantinereader.com/search">
+    <meta name="og:url" content="https://levantinereader.com/dictionary">
     <meta name="og:title" content="Levantine Arabic Dictionary">
     <meta name="og:description" content="Dictionary for the Levantine Arabic language dialect">
 
