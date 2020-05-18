@@ -41,6 +41,10 @@ app.get('/content/:filename', function (req, res) {
     return processFile(req, res, req.params.filename);
 });
 
+app.get('/dictionary', function (req, res) {
+    return processSearch(req, res, req.query.q);
+});
+
 app.get('/search', function (req, res) {
     return processSearch(req, res, req.query.q);
 });
