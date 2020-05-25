@@ -457,11 +457,14 @@
 
             {{#if content}}
             $('.source').attr('rows', '1');
-            $('.source').focusout(function () {
+            $('.btn-read').removeClass('btn-warning').addClass('btn-outline-dark');
+            $('.source').change(function () {
                 $(this).attr('rows', '1');
+                $('.btn-read').removeClass('btn-warning').addClass('btn-outline-dark');
             });
             $('.source').focus(function () {
                 $(this).attr('rows', '3');
+                $('.btn-read').removeClass('btn-outline-dark').addClass('btn-warning');
             });
             {{/if}}
         });
