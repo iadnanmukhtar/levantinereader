@@ -1,5 +1,5 @@
 {
-  "name": "arabic-reader",
+  "name": "levantinereader",
   "version": "1.0.0",
   "description": "Web app to help read Dialect Arabic text, such as, the Levantine dialect",
   "main": "app.js",
