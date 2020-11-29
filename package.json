@@ -17,5 +17,8 @@
     "mongodb": "^3.5.7",
     "nodemailer": "^6.4.6",
     "string-similarity": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
